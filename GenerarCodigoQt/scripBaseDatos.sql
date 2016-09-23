@@ -1,5 +1,5 @@
 CREATE DATABASE estudiantes ;
-USE DATABASE estudiantes;
+USE estudiantes;
 
 CREATE TABLE estudiantes (
 	int 		nua 			not null primary key,
