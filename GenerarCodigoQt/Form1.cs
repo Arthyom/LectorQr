@@ -99,9 +99,18 @@ namespace GenerarCodigoQt
 
         private void button1_Click(object sender, EventArgs e)
         {
-            /// generar un codigo QR para los elementos de la caja 
+            // crear un directorio para los codigos 
+            string ruta = @"C:\Users\frodo\Desktop\codigosQr";
 
-            for ( int i = 1; i < 30; i ++)
+            if ( ! Directory.Exists(ruta))
+            {
+                // crear un directorio 
+                Directory.CreateDirectory(ruta);
+            } 
+
+            /// generar un codigo QR para los elementos de la caja 
+        
+            for ( int i = 1; i <= 30; i ++)
             {
                 // crear un encoder, codificador
                 QrEncoder Codificador = new QrEncoder(ErrorCorrectionLevel.H);
@@ -124,6 +133,9 @@ namespace GenerarCodigoQt
                 // generar controles para ponerlos en el form
                 var ImagenQR = new Bitmap(ms);
                 var ImgenSalida = new Bitmap(ImagenQR, new Size(panel1.Width, panel1.Height));
+
+                // guardar la imagen
+                ImgenSalida.Save(ruta + "/" + i.ToString() +".png", System.Drawing.Imaging.ImageFormat.Png);
 
                 // asignar la imagen al panel 
                 panel1.BackgroundImage = ImgenSalida;
