@@ -10,3 +10,7 @@ CREATE TABLE estudiante (
  	apeidoMaterno	int				not null,
 	asistencia		bool			not null
 );
+
+INSERT INTO estudiante ( nua, nombre,  evento, carrera, apeidoPaterno, apeidoMaterno, asistencia)
+	VALUES (01, "estudiante1","electroni" ,"prueba", "paterno1", "paterno2", false);
+

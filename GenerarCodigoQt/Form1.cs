@@ -59,6 +59,27 @@ namespace GenerarCodigoQt
             InitializeComponent();
         }
 
+        // genera codigos qr y los guarda en un directorio apartir de los datos de una tabla
+        void generarQrFromSQL()
+        {
+            // conectarse con la base de datos 
+            MySqlConnection Conexion = new MySqlConnection("Server = localhost; Database=estudiantes; Uid=root; Pwd= ;");
+
+            // hacer una consulta a la base de datos
+            MySqlCommand Comando = new MySqlCommand(" SELECT * from estudiante;", Conexion);
+
+            // abrir la conexion con la base de datos
+            Conexion.Open();
+
+            // conseguir un lector de todos los datos que se han leido
+            MySqlDataReader lector = Comando.ExecuteReader();
+
+            // leer toda la base de datos 
+            while (lector.Read())
+                MessageBox.Show(lector.GetString(0) + " " + lector.GetString(1) + " " + lector.GetString(2) + " " + lector.GetString(3) + " " + lector.GetString(4) + " " +
+                    lector.GetString(5) + " " + lector.GetBoolean(6)   );
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             button1.Text = "Generar";
@@ -80,30 +101,37 @@ namespace GenerarCodigoQt
         {
             /// generar un codigo QR para los elementos de la caja 
 
-            // crear un encoder, codificador
-            QrEncoder Codificador = new QrEncoder( ErrorCorrectionLevel.H );
+            for ( int i = 1; i < 30; i ++)
+            {
+                // crear un encoder, codificador
+                QrEncoder Codificador = new QrEncoder(ErrorCorrectionLevel.H);
 
-            // crear un codigo QR
-            QrCode Codigo = new QrCode();
+                // crear un codigo QR
+                QrCode Codigo = new QrCode();
 
-            // generar generar  un codigo apartir de datos, y pasar el codigo por referencia
-            Codificador.TryEncode(textBox1.Text, out Codigo);
+                // generar generar  un codigo apartir de datos, y pasar el codigo por referencia
+                Codificador.TryEncode(i.ToString(), out Codigo);
 
-            // generar un graficador 
-            GraphicsRenderer Renderisado = new GraphicsRenderer(new FixedCodeSize(200, QuietZoneModules.Zero), Brushes.Black, Brushes.White);
+                // generar un graficador 
+                GraphicsRenderer Renderisado = new GraphicsRenderer(new FixedCodeSize(200, QuietZoneModules.Zero), Brushes.Black, Brushes.White);
 
-            // generar un flujo de datos 
-            MemoryStream ms = new MemoryStream();
+                // generar un flujo de datos 
+                MemoryStream ms = new MemoryStream();
 
-            // escribir datos en el renderizado
-            Renderisado.WriteToStream(Codigo.Matrix, ImageFormat.Png, ms);
+                // escribir datos en el renderizado
+                Renderisado.WriteToStream(Codigo.Matrix, ImageFormat.Png, ms);
 
-            // generar controles para ponerlos en el form
-            var ImagenQR = new Bitmap(ms);
-            var ImgenSalida = new Bitmap(ImagenQR, new Size(panel1.Width, panel1.Height));
+                // generar controles para ponerlos en el form
+                var ImagenQR = new Bitmap(ms);
+                var ImgenSalida = new Bitmap(ImagenQR, new Size(panel1.Width, panel1.Height));
 
-            // asignar la imagen al panel 
-            panel1.BackgroundImage = ImgenSalida;
+                // asignar la imagen al panel 
+                panel1.BackgroundImage = ImgenSalida;
+
+                panel1.Refresh();
+                System.Threading.Thread.Sleep(500);
+            }
+            
             
 
 
@@ -219,6 +247,11 @@ namespace GenerarCodigoQt
 
                    
             }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            this.generarQrFromSQL();
         }
     }
 }
