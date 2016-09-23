@@ -1,12 +1,12 @@
 CREATE DATABASE estudiantes ;
 USE estudiantes;
 
-CREATE TABLE estudiantes (
-	int 		nua 			not null primary key,
-	varchar		nombre(30)		not null,
-	varchar		evento(30)		not null,
-	varchar		carrera(20)		not null,
-	int 	 	apeidoPaterno	not null,
-	int 		apeidoMaterno	not null,
-	bool		asistencia		not null
+CREATE TABLE estudiante (
+	nua 			int         	not null primary key,
+	nombre			varchar(30)		not null,
+	evento			varchar(30)		not null,
+	carrera     	varchar(20)		not null,
+	apeidoPaterno	int 			not null,
+ 	apeidoMaterno	int				not null,
+	asistencia		bool			not null
 );
