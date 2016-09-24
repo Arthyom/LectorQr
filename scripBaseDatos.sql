@@ -1,3 +1,4 @@
+DROP DATABASE estudiantes;
 CREATE DATABASE estudiantes ;
 USE estudiantes;
 
@@ -6,8 +7,8 @@ CREATE TABLE estudiante (
 	nombre			varchar(30)		not null,
 	evento			varchar(30)		not null,
 	carrera     	varchar(20)		not null,
-	apeidoPaterno	int 			not null,
- 	apeidoMaterno	int				not null,
+	apeidoPaterno	varchar(20)		not null,
+ 	apeidoMaterno	varchar(20)		not null,
 	asistencia		bool			not null
 );
 
@@ -60,7 +61,7 @@ INSERT INTO estudiante ( nua, nombre,  evento, carrera, apeidoPaterno, apeidoMat
 
 
 INSERT INTO estudiante ( nua, nombre,  evento, carrera, apeidoPaterno, apeidoMaterno, asistencia)
-	VALUES (15, "estudiante16","electroni" ,"prueba", "paterno1", "paterno2", false);
+	VALUES (16, "estudiante16","electroni" ,"prueba", "paterno1", "paterno2", false);
 
 INSERT INTO estudiante ( nua, nombre,  evento, carrera, apeidoPaterno, apeidoMaterno, asistencia)
 	VALUES (17, "estudiante17","electroni" ,"prueba", "paterno1", "paterno2", false);

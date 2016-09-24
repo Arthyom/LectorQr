@@ -66,6 +66,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.desdeSQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabModo.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -107,6 +108,7 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Modo Registro";
             this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
             // panel5
             // 
@@ -277,11 +279,13 @@
             // toolStripDropDownButton2
             // 
             this.toolStripDropDownButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.desdeSQLToolStripMenuItem});
             this.toolStripDropDownButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton2.Image")));
             this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
-            this.toolStripDropDownButton2.Size = new System.Drawing.Size(164, 22);
-            this.toolStripDropDownButton2.Text = "toolStripDropDownButton2";
+            this.toolStripDropDownButton2.Size = new System.Drawing.Size(61, 22);
+            this.toolStripDropDownButton2.Text = "Generar";
             // 
             // btnInsertar
             // 
@@ -421,6 +425,13 @@
             this.pictureBox3.TabIndex = 13;
             this.pictureBox3.TabStop = false;
             // 
+            // desdeSQLToolStripMenuItem
+            // 
+            this.desdeSQLToolStripMenuItem.Name = "desdeSQLToolStripMenuItem";
+            this.desdeSQLToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.desdeSQLToolStripMenuItem.Text = "Desde SQL";
+            this.desdeSQLToolStripMenuItem.Click += new System.EventHandler(this.desdeSQLToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -486,6 +497,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.ToolStripMenuItem desdeSQLToolStripMenuItem;
     }
 }
 

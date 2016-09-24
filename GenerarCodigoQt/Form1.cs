@@ -81,8 +81,51 @@ namespace GenerarCodigoQt
 
             // leer toda la base de datos 
             while (lector.Read())
-                MessageBox.Show(lector.GetString(0) + " " + lector.GetString(1) + " " + lector.GetString(2) + " " + lector.GetString(3) + " " + lector.GetString(4) + " " +
-                    lector.GetString(5) + " " + lector.GetBoolean(6)   );
+            {
+                // crear un encoder, codificador
+                QrEncoder Codificador = new QrEncoder(ErrorCorrectionLevel.H);
+
+                // crear un codigo QR
+                QrCode Codigo = new QrCode();
+
+                txtNUA.Text = lector.GetString(0);
+                txtNombre.Text = lector.GetString(1);
+                txtCarrera.Text = lector.GetString(2);
+                txtEve.Text = lector.GetString(3);
+                txtPaterno.Text = lector.GetString(4);
+                txtMaterno.Text = lector.GetString(5);
+
+                panel5.Refresh();
+
+                // generar generar  un codigo apartir de datos, y pasar el codigo por referencia
+                Codificador.TryEncode(txtNombre.Text + " " + txtNUA.Text, out Codigo);
+
+                // generar un graficador 
+                GraphicsRenderer Renderisado = new GraphicsRenderer(new FixedCodeSize(200, QuietZoneModules.Zero), Brushes.Black, Brushes.White);
+
+                // generar un flujo de datos 
+                MemoryStream ms = new MemoryStream();
+
+                // escribir datos en el renderizado
+                Renderisado.WriteToStream(Codigo.Matrix, ImageFormat.Png, ms);
+
+                // generar controles para ponerlos en el form
+                var ImagenQR = new Bitmap(ms);
+                var ImgenSalida = new Bitmap(ImagenQR, new Size(panel4.Width / 2, panel4.Height / 2));
+
+                if (!Directory.Exists(this.rutaGuardado))
+                    // crear un directorio 
+                    Directory.CreateDirectory(this.rutaGuardado);
+
+                ImgenSalida.Save(this.rutaGuardado + "/" + txtNUA.Text + ".png", System.Drawing.Imaging.ImageFormat.Png);
+
+                // asignar la imagen al panel 
+                // panel4.BackgroundImage = ImgenSalida;
+                pictureBox1.Image = ImgenSalida;
+                System.Threading.Thread.Sleep(1000);
+                pictureBox1.Refresh();
+            }
+            MessageBox.Show("Lectura termiada", " ", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -516,6 +559,20 @@ namespace GenerarCodigoQt
             foreach (Control c in this.panel5.Controls)
                 if (c is TextBox)
                     c.Text = "";
+        }
+
+        private void desdeSQLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           DialogResult re =  MessageBox.Show("Desea generar codigos Qr desde la base de datos?", " ", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+           if( re == DialogResult.Yes ) generarQrFromSQL();
+           else
+                MessageBox.Show("Se ha omitido la generacion automatica de Codigo Qr", " ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
