@@ -59,6 +59,7 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.listView1 = new System.Windows.Forms.ListView();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
@@ -66,7 +67,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.listView1 = new System.Windows.Forms.ListView();
             this.tabModo.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -202,7 +202,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(354, 25);
             this.label4.TabIndex = 31;
-            this.label4.Text = "Apeido Materno";
+            this.label4.Text = "Apellido Materno";
             // 
             // label3
             // 
@@ -211,7 +211,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(357, 27);
             this.label3.TabIndex = 30;
-            this.label3.Text = "Apeido Paterno";
+            this.label3.Text = "Apellido Paterno";
             // 
             // label2
             // 
@@ -344,11 +344,11 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.panel2);
             this.tabPage2.Controls.Add(this.listView1);
             this.tabPage2.Controls.Add(this.comboBox1);
             this.tabPage2.Controls.Add(this.button6);
             this.tabPage2.Controls.Add(this.button7);
-            this.tabPage2.Controls.Add(this.panel2);
             this.tabPage2.Controls.Add(this.panel1);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
@@ -358,19 +358,27 @@
             this.tabPage2.Text = "Modo Lector";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // listView1
+            // 
+            this.listView1.Location = new System.Drawing.Point(517, 6);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(329, 385);
+            this.listView1.TabIndex = 15;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            // 
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(8, 6);
+            this.comboBox1.Location = new System.Drawing.Point(168, 6);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(343, 21);
             this.comboBox1.TabIndex = 14;
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(437, 348);
+            this.button6.Location = new System.Drawing.Point(168, 348);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(74, 43);
+            this.button6.Size = new System.Drawing.Size(161, 43);
             this.button6.TabIndex = 13;
             this.button6.Text = "Encender";
             this.button6.UseVisualStyleBackColor = true;
@@ -378,9 +386,9 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(357, 348);
+            this.button7.Location = new System.Drawing.Point(350, 348);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(74, 43);
+            this.button7.Size = new System.Drawing.Size(161, 43);
             this.button7.TabIndex = 12;
             this.button7.Text = "Apagar";
             this.button7.UseVisualStyleBackColor = true;
@@ -388,18 +396,18 @@
             // 
             // panel2
             // 
-            this.panel2.Location = new System.Drawing.Point(8, 30);
+            this.panel2.Location = new System.Drawing.Point(168, 33);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(343, 361);
+            this.panel2.Size = new System.Drawing.Size(343, 312);
             this.panel2.TabIndex = 11;
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Location = new System.Drawing.Point(357, 6);
+            this.panel1.Location = new System.Drawing.Point(6, 6);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(154, 336);
+            this.panel1.Size = new System.Drawing.Size(154, 385);
             this.panel1.TabIndex = 6;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -423,14 +431,6 @@
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox3.TabIndex = 13;
             this.pictureBox3.TabStop = false;
-            // 
-            // listView1
-            // 
-            this.listView1.Location = new System.Drawing.Point(517, 6);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(329, 385);
-            this.listView1.TabIndex = 15;
-            this.listView1.UseCompatibleStateImageBehavior = false;
             // 
             // Form1
             // 

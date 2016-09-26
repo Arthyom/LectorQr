@@ -130,10 +130,14 @@ namespace GenerarCodigoQt
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            listView1.Columns.Add(new ColumnHeader("NUA"));
-            listView1.Columns.Add(new ColumnHeader("Nombre"));
-            listView1.Columns.Add(new ColumnHeader("Apeido Paterno"));
-            listView1.Columns.Add(new ColumnHeader("Apeido Materno"));
+            listView1.Columns.Add( "NUA" , this.listView1.Width/5 );
+            listView1.Columns.Add( "Nombre", this.listView1.Width / 5);
+
+            listView1.Columns.Add( "A. Paternod", this.listView1.Width / 3);
+            listView1.Columns.Add(" A. Materno", this.listView1.Width / 3);
+            listView1.Columns.Add(" Carrera ", this.listView1.Width / 5);
+
+            listView1.View = View.Details;
 
 
             // conseguir todos los dispositivos de video
@@ -426,7 +430,7 @@ namespace GenerarCodigoQt
                 if (codigo != null /*&& codigo.Count() > 0*/)
                 {
                     MessageBox.Show(codigo.Length.ToString());
-                    listBox2.Items.Add(codigo[0]);
+                    //listBox2.Items.Add(codigo[0]);
 
                     // verificar si existe coincidencia en la base de datos para "codigo"
 
