@@ -90,10 +90,10 @@
             this.tabModo.Controls.Add(this.tabPage1);
             this.tabModo.Controls.Add(this.tabPage2);
             this.tabModo.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabModo.Location = new System.Drawing.Point(-2, 184);
+            this.tabModo.Location = new System.Drawing.Point(-2, 124);
             this.tabModo.Name = "tabModo";
             this.tabModo.SelectedIndex = 0;
-            this.tabModo.Size = new System.Drawing.Size(1444, 659);
+            this.tabModo.Size = new System.Drawing.Size(1444, 643);
             this.tabModo.TabIndex = 11;
             // 
             // tabPage1
@@ -108,7 +108,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 34);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1436, 621);
+            this.tabPage1.Size = new System.Drawing.Size(1436, 605);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Modo Registro";
             this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
@@ -127,7 +127,7 @@
             this.panel5.Controls.Add(this.label3);
             this.panel5.Controls.Add(this.label2);
             this.panel5.Controls.Add(this.label1);
-            this.panel5.Location = new System.Drawing.Point(6, 222);
+            this.panel5.Location = new System.Drawing.Point(6, 150);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(757, 299);
             this.panel5.TabIndex = 8;
@@ -246,7 +246,7 @@
             this.panel3.Controls.Add(this.toolStrip1);
             this.panel3.Location = new System.Drawing.Point(6, 17);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(742, 28);
+            this.panel3.Size = new System.Drawing.Size(757, 28);
             this.panel3.TabIndex = 7;
             // 
             // toolStrip1
@@ -257,7 +257,7 @@
             this.toolStripDropDownButton2});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(742, 28);
+            this.toolStrip1.Size = new System.Drawing.Size(757, 28);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -307,7 +307,7 @@
             // 
             // btnInsertar
             // 
-            this.btnInsertar.Location = new System.Drawing.Point(543, 535);
+            this.btnInsertar.Location = new System.Drawing.Point(543, 463);
             this.btnInsertar.Name = "btnInsertar";
             this.btnInsertar.Size = new System.Drawing.Size(220, 75);
             this.btnInsertar.TabIndex = 4;
@@ -317,7 +317,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(269, 535);
+            this.button2.Location = new System.Drawing.Point(278, 463);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(220, 75);
             this.button2.TabIndex = 6;
@@ -327,7 +327,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(6, 535);
+            this.button1.Location = new System.Drawing.Point(6, 463);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(231, 75);
             this.button1.TabIndex = 5;
@@ -340,14 +340,14 @@
             this.panel4.BackColor = System.Drawing.Color.DarkGray;
             this.panel4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.panel4.Controls.Add(this.pictureBox1);
-            this.panel4.Location = new System.Drawing.Point(769, 7);
+            this.panel4.Location = new System.Drawing.Point(769, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(664, 610);
+            this.panel4.Size = new System.Drawing.Size(590, 535);
             this.panel4.TabIndex = 1;
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(174, 162);
+            this.pictureBox1.Location = new System.Drawing.Point(158, 112);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(328, 330);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -365,16 +365,16 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 34);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1436, 621);
+            this.tabPage2.Size = new System.Drawing.Size(1436, 605);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Modo Lector";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(334, 541);
+            this.button7.Location = new System.Drawing.Point(587, 462);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(253, 77);
+            this.button7.Size = new System.Drawing.Size(218, 77);
             this.button7.TabIndex = 12;
             this.button7.Text = "Apagar";
             this.button7.UseVisualStyleBackColor = true;
@@ -384,15 +384,15 @@
             // 
             this.panel2.Location = new System.Drawing.Point(334, 45);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(522, 490);
+            this.panel2.Size = new System.Drawing.Size(471, 411);
             this.panel2.TabIndex = 11;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // listView1
             // 
-            this.listView1.Location = new System.Drawing.Point(862, 6);
+            this.listView1.Location = new System.Drawing.Point(811, 6);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(566, 609);
+            this.listView1.Size = new System.Drawing.Size(548, 530);
             this.listView1.TabIndex = 15;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
@@ -402,14 +402,14 @@
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(334, 6);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(522, 33);
+            this.comboBox1.Size = new System.Drawing.Size(471, 33);
             this.comboBox1.TabIndex = 14;
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(603, 541);
+            this.button6.Location = new System.Drawing.Point(334, 462);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(253, 74);
+            this.button6.Size = new System.Drawing.Size(218, 76);
             this.button6.TabIndex = 13;
             this.button6.Text = "Encender";
             this.button6.UseVisualStyleBackColor = true;
@@ -420,9 +420,9 @@
             this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.label7);
-            this.panel1.Location = new System.Drawing.Point(6, 6);
+            this.panel1.Location = new System.Drawing.Point(3, 6);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(322, 609);
+            this.panel1.Size = new System.Drawing.Size(322, 530);
             this.panel1.TabIndex = 6;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -438,10 +438,11 @@
             // 
             // pictureBox2
             // 
+            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
             this.pictureBox2.Location = new System.Drawing.Point(-86, -31);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(1528, 221);
+            this.pictureBox2.Size = new System.Drawing.Size(1528, 159);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 12;
             this.pictureBox2.TabStop = false;
@@ -452,9 +453,9 @@
             this.pictureBox3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox3.BackgroundImage")));
             this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(1287, 0);
+            this.pictureBox3.Location = new System.Drawing.Point(1252, 10);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(137, 178);
+            this.pictureBox3.Size = new System.Drawing.Size(109, 109);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox3.TabIndex = 13;
             this.pictureBox3.TabStop = false;
@@ -463,7 +464,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1436, 840);
+            this.ClientSize = new System.Drawing.Size(1362, 699);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.tabModo);
             this.Controls.Add(this.pictureBox2);
