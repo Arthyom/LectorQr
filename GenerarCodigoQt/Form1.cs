@@ -32,6 +32,7 @@ namespace GenerarCodigoQt
         public string cadenaConexion = "Server = localhost; Database=estudiantes; Uid=root; Pwd= ;";
         public MySqlConnection conexion;
         public string rutaGuardado = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/CodigosGenerados";
+        public string menAceptado = "ACEPTADO", menRechazado = "RECHAZADO", menVacio = "VACIO";
 
         void ConectarConMysql()
         {
@@ -297,84 +298,108 @@ namespace GenerarCodigoQt
                 imagen.Dispose();
 
                 // agregar cuando se lea algo
-                if (codigo != null /*&& codigo.Count() > 0*/)
+                if (codigo != null)
                 {
                     char separador = ' ';
                     string[] matriz = codigo[0].Split(separador);
 
-
-                    // verificar si existe coincidencia en la base de datos para "codigo"
-
-                    /* crear una nueva conexion */
-                    this.conexion = new MySqlConnection(this.cadenaConexion);
-                    this.conexion.Open();
-
-                    /* crear un comando */
-                    string nua = matriz[1];
-                    string nombre = matriz[0];
-                    string comandoInterno = "SELECT * FROM estudiante WHERE nua =" + Convert.ToInt32(nua) + ";";
-
-                    try
+                    if (matriz.Count() >= 2)
                     {
+                        // verificar si existe coincidencia en la base de datos para "codigo"
 
-                        MySqlCommand Comando = new MySqlCommand(comandoInterno, this.conexion);
+                        /* crear una nueva conexion */
+                        this.conexion = new MySqlConnection(this.cadenaConexion);
+                        this.conexion.Open();
 
-                    // conseguir un lector
-                    MySqlDataReader lectort = Comando.ExecuteReader();
-                    
+                        /* crear un comando */
+                        string nua = matriz[1];
+                        string nombre = matriz[0];
+                        string comandoInterno = "SELECT * FROM estudiante WHERE nua =" + Convert.ToInt32(nua) + ";";
 
-                    if (lectort.Read())
-                    {
-                            this.panel1.BackColor = Color.Green;
-                            this.panel1.Refresh();
+                        try
+                        {
 
-                            if ( !lectort.GetBoolean(6))
+                            MySqlCommand Comando = new MySqlCommand(comandoInterno, this.conexion);
+
+                            // conseguir un lector
+                            MySqlDataReader lectort = Comando.ExecuteReader();
+
+
+                            if (lectort.Read())
                             {
-                                this.conexion = new MySqlConnection(this.cadenaConexion);
-                                // actulizar la asistencia de los registrados 
-                                string comandoActu = @"UPDATE estudiante SET  nombre ='" + lectort.GetString(1) +
-                                     "', evento = '" + lectort.GetString(2) + "', carrera ='" + lectort.GetString(3) + "', apeidoPaterno = '" + lectort.GetString(4) +
-                                     "', apeidoMaterno = ' " + lectort.GetString(5) + "', asistencia =" + !lectort.GetBoolean(6) + " WHERE nua =" + lectort.GetInt32(0) + ";";
+                                this.panel1.BackColor = Color.Green;
+                                this.panel1.Refresh();
 
-                                this.conexion.Close();
+                                if (lectort.GetBoolean(6))
+                                {
+                                    this.conexion = new MySqlConnection(this.cadenaConexion);
+                                    // actulizar la asistencia de los registrados 
+                                    string comandoActu = @"UPDATE estudiante SET  nombre ='" + lectort.GetString(1) +
+                                         "', evento = '" + lectort.GetString(2) + "', carrera ='" + lectort.GetString(3) + "', apeidoPaterno = '" + lectort.GetString(4) +
+                                         "', apeidoMaterno = ' " + lectort.GetString(5) + "', asistencia =" + !lectort.GetBoolean(6) + " WHERE nua =" + lectort.GetInt32(0) + ";";
 
-                                // crear un nuevo commando 
-                                MySqlCommand comandoUpdate = new MySqlCommand(comandoActu, this.conexion);
-                                this.conexion.Open();
+                                    ListViewItem itNua = new ListViewItem(lectort.GetString(0));
+                                    ListViewItem.ListViewSubItem itCar = new ListViewItem.ListViewSubItem(itNua, lectort.GetString(3));
+                                    ListViewItem.ListViewSubItem itNom = new ListViewItem.ListViewSubItem(itNua, lectort.GetString(1));
+                                    ListViewItem.ListViewSubItem itApa = new ListViewItem.ListViewSubItem(itNua, lectort.GetString(4));
+                                    ListViewItem.ListViewSubItem itAma = new ListViewItem.ListViewSubItem(itNua, lectort.GetString(5));
 
-                                // ejecutar el nuevo comando
-                                comandoUpdate.ExecuteNonQuery();
-                                this.conexion.Close();
+                                    itNua.SubItems.Add(itNom);
+                                    itNua.SubItems.Add(itApa);
+                                    itNua.SubItems.Add(itAma);
+                                    itNua.SubItems.Add(itCar);
+                                    listView1.Items.Add(itNua);
 
-                                System.Threading.Thread.Sleep(500);
-                                // MessageBox.Show("Asistencia Confirmada");
-                                timer1.Stop();
-                                System.Threading.Thread.Sleep(500);
-                                timer1.Start();
-                                return;
-                            }                         
+                                    this.label7.Text = this.menAceptado;
+
+
+
+                                    this.conexion.Close();
+
+                                    // crear un nuevo commando 
+                                    MySqlCommand comandoUpdate = new MySqlCommand(comandoActu, this.conexion);
+                                    this.conexion.Open();
+
+
+                                    // ejecutar el nuevo comando
+                                    comandoUpdate.ExecuteNonQuery();
+                                    this.conexion.Close();
+
+                                    System.Threading.Thread.Sleep(500);
+                                    // MessageBox.Show("Asistencia Confirmada");
+                                    timer1.Stop();
+                                    System.Threading.Thread.Sleep(500);
+                                    timer1.Start();
+                                    return;
+                                }
+                            }
+                            else
+                            {
+                                this.panel1.BackColor = Color.Red;
+                                this.label7.Text = this.menRechazado;
+
+                            }
+
+
+
+                        }
+                        catch (Exception ex)
+                        {
+                            panel1.BackColor = Color.Yellow;
+                            panel1.Refresh();
+                            System.Threading.Thread.Sleep(500);
+
+                        }
                     }
-                    else
-                    {
-                        this.panel1.BackColor = Color.Red;
 
 
-                    }
-
-                    
 
                 }
-                catch (Exception ex)
-                {
-                    panel1.BackColor = Color.Yellow;
-                    panel1.Refresh();
-                    System.Threading.Thread.Sleep(500);
-
-                }
-
-                }
-                else
+                else {
                     panel1.BackColor = Color.Black;
+                    this.label7.Text = this.menVacio;
+                }
+
             }
             
 
@@ -578,7 +603,22 @@ namespace GenerarCodigoQt
                 MessageBox.Show("Se ha omitido la generacion automatica de Codigo Qr", " ", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
         private void tabPage1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
         {
 
         }
