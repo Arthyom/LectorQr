@@ -130,6 +130,12 @@ namespace GenerarCodigoQt
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            listView1.Columns.Add(new ColumnHeader("NUA"));
+            listView1.Columns.Add(new ColumnHeader("Nombre"));
+            listView1.Columns.Add(new ColumnHeader("Apeido Paterno"));
+            listView1.Columns.Add(new ColumnHeader("Apeido Materno"));
+
+
             // conseguir todos los dispositivos de video
             this.ColeccionDisp = new FilterInfoCollection(FilterCategory.VideoInputDevice);
 
@@ -292,7 +298,6 @@ namespace GenerarCodigoQt
                     char separador = ' ';
                     string[] matriz = codigo[0].Split(separador);
 
-                    listBox2.Items.Add(codigo[0]);
 
                     // verificar si existe coincidencia en la base de datos para "codigo"
 
@@ -321,7 +326,6 @@ namespace GenerarCodigoQt
 
                             if ( !lectort.GetBoolean(6))
                             {
-                               
                                 this.conexion = new MySqlConnection(this.cadenaConexion);
                                 // actulizar la asistencia de los registrados 
                                 string comandoActu = @"UPDATE estudiante SET  nombre ='" + lectort.GetString(1) +
