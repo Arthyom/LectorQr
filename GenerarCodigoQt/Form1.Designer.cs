@@ -71,7 +71,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.button3 = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.panel6 = new System.Windows.Forms.Panel();
             this.lec = new System.Windows.Forms.TextBox();
@@ -114,7 +113,6 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.White;
-            this.tabPage1.Controls.Add(this.button3);
             this.tabPage1.Controls.Add(this.panel5);
             this.tabPage1.Controls.Add(this.panel3);
             this.tabPage1.Controls.Add(this.btnInsertar);
@@ -314,8 +312,8 @@
             this.toolStripDropDownButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton2.Image")));
             this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
-            this.toolStripDropDownButton2.Size = new System.Drawing.Size(61, 25);
-            this.toolStripDropDownButton2.Text = "Generar";
+            this.toolStripDropDownButton2.Size = new System.Drawing.Size(77, 25);
+            this.toolStripDropDownButton2.Text = "Generar Qr";
             // 
             // desdeSQLToolStripMenuItem
             // 
@@ -505,16 +503,6 @@
             this.pictureBox3.TabIndex = 13;
             this.pictureBox3.TabStop = false;
             // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(324, 85);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(261, 59);
-            this.button3.TabIndex = 9;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click_1);
-            // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.lec);
@@ -580,7 +568,8 @@
             // 
             this.qrSinSQLToolStripMenuItem.Name = "qrSinSQLToolStripMenuItem";
             this.qrSinSQLToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.qrSinSQLToolStripMenuItem.Text = "Qr Sin SQL";
+            this.qrSinSQLToolStripMenuItem.Text = "Desde Txt";
+            this.qrSinSQLToolStripMenuItem.Click += new System.EventHandler(this.qrSinSQLToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -657,7 +646,6 @@
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton3;
         private System.Windows.Forms.ToolStripMenuItem borrarBaseDeDatosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reestablecerToolStripMenuItem;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TextBox lec;
         private System.Windows.Forms.Panel panel6;

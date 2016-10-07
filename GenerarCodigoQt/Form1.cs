@@ -768,9 +768,18 @@ namespace GenerarCodigoQt
             // poner en la caja de texto 
             StreamReader lector = new StreamReader(this.rutaCrono);
 
-            while( !lector.EndOfStream)
+            while( !lector.EndOfStream )
                 this.lec.Text += lector.ReadLine();
 
+        }
+
+        private void qrSinSQLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult re = MessageBox.Show("Desea generar codigos Qr desde archivo de registro", " ", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (re == DialogResult.Yes) generarQrFromSQL();
+            else
+                MessageBox.Show("Se ha omitido la generacion automatica de Codigo Qr", " ", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         // crear tablas para los horarios de las actividades
