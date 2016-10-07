@@ -1,8 +1,8 @@
-DROP DATABASE estudiantes;
-CREATE DATABASE estudiantes ;
+DROP DATABASE IF EXISTS estudiantes;
+CREATE DATABASE IF NOT EXISTS estudiantes ;
 USE estudiantes;
 
-CREATE TABLE estudiante (
+CREATE TABLE IF NOT EXISTS estudiante (
 	nua 			int         	not null primary key,
 	nombre			varchar(30)		not null,
 	evento			varchar(30)		not null,

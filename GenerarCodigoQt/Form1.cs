@@ -32,7 +32,10 @@ namespace GenerarCodigoQt
         public string cadenaConexion = "Server = localhost; Database=estudiantes; Uid=root; Pwd= ;";
         public MySqlConnection conexion;
         public string rutaGuardado = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/CodigosGenerados";
+        public string rutaSql  = "../../../scripBaseDatos.sql";
         public string menAceptado = "ACEPTADO", menRechazado = "RECHAZADO", menVacio = "VACIO";
+        public string rutaCrono = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/ingles/cronograma.txt" ;
+        public string rutaAsist = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/ingles/asistentes.txt";
 
         void ConectarConMysql()
         {
@@ -144,7 +147,7 @@ namespace GenerarCodigoQt
             // conseguir todos los dispositivos de video
             this.ColeccionDisp = new FilterInfoCollection(FilterCategory.VideoInputDevice);
 
-            MessageBox.Show(this.rutaGuardado);
+            //MessageBox.Show(this.rutaGuardado);
             // desplegar dispositivos en el combo
             foreach (FilterInfo disp in ColeccionDisp)
                 comboBox1.Items.Add(disp.Name);
@@ -329,8 +332,11 @@ namespace GenerarCodigoQt
                             {
                                 this.panel1.BackColor = Color.Green;
                                 this.panel1.Refresh();
+                                this.label7.Text = this.menAceptado;
+                                this.label7.Refresh();
 
-                                if (lectort.GetBoolean(6))
+
+                                if (!lectort.GetBoolean(6))
                                 {
                                     this.conexion = new MySqlConnection(this.cadenaConexion);
                                     // actulizar la asistencia de los registrados 
@@ -349,10 +355,6 @@ namespace GenerarCodigoQt
                                     itNua.SubItems.Add(itAma);
                                     itNua.SubItems.Add(itCar);
                                     listView1.Items.Add(itNua);
-
-                                    this.label7.Text = this.menAceptado;
-
-
 
                                     this.conexion.Close();
 
@@ -377,6 +379,7 @@ namespace GenerarCodigoQt
                             {
                                 this.panel1.BackColor = Color.Red;
                                 this.label7.Text = this.menRechazado;
+                                this.label7.Refresh();
 
                             }
 
@@ -391,7 +394,13 @@ namespace GenerarCodigoQt
 
                         }
                     }
-
+                    else
+                    {
+                        this.panel1.BackColor = Color.Red;
+                        this.label7.Text = this.menRechazado;
+                        this.label7.Refresh();
+                    }
+                    this.conexion.Close();
 
 
                 }
@@ -613,6 +622,65 @@ namespace GenerarCodigoQt
 
         }
 
+        private void borrarBaseDeDatosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult res = MessageBox.Show("Realmente desea borrar toda la base de datos?", " ",MessageBoxButtons.YesNo, MessageBoxIcon.Question );
+            if (res == DialogResult.Yes)
+            {
+                // crear una nueva conexion al servidor 
+                this.conexion = new MySqlConnection(this.cadenaConexion);
+                this.conexion.Open();
+
+                // crear un comando 
+                string comando = "DELETE FROM estudiante";
+                MySqlCommand comandoBorrar = new MySqlCommand(comando, this.conexion);
+                
+
+                // ejecutar el comando
+                comandoBorrar.ExecuteNonQuery();
+                MessageBox.Show("la base de datos ha sido borrada", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                this.conexion.Close();
+
+            }
+            else
+                MessageBox.Show("Se ha cancelado el borrado", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void reestablecerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult res = MessageBox.Show("Realmente desea reestablecer la base de datos?", " ", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (res == DialogResult.Yes)
+            {
+                // crear una nueva conexion al servidor 
+                this.conexion = new MySqlConnection(this.cadenaConexion);
+                this.conexion.Open();
+
+                // conseguir el comando de creacion
+                StreamReader lector = new StreamReader(this.rutaSql);
+
+                //leer linea por linea y almacenar la lectura 
+                string comando = " ";
+
+                while ( !lector.EndOfStream )
+                    comando += lector.ReadLine();
+
+                MessageBox.Show(comando);
+                     
+                // crear un comando 
+                MySqlCommand comandoBorrar = new MySqlCommand(comando, this.conexion);
+                
+
+                // ejecutar el comando
+                comandoBorrar.ExecuteNonQuery();
+                MessageBox.Show("la base de datos ha sido Reestablecida", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.conexion.Close();
+
+            }
+            else
+                MessageBox.Show("Se ha cancelado la restauracion", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
         private void tabPage1_Click(object sender, EventArgs e)
         {
 
@@ -622,5 +690,145 @@ namespace GenerarCodigoQt
         {
 
         }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            this.CargarFormato(@"C:\Users\frodo\Desktop\crono.txt");
+        }
+
+        // leer el archivo de texto de configuracion 
+        private void CargarFormato ( string ruta )
+        {
+            StreamReader lector = new StreamReader(ruta);
+
+            // crear un nuevo evento 
+            Evento ev = new Evento();
+
+            // leer propiedades del evento
+            ev.nombre = lector.ReadLine();
+            ev.numeroActividades = Convert.ToInt32(lector.ReadLine());
+
+            // definir un vector de n eventos
+            ev.actividadesEvento = new Actividad[ev.numeroActividades];
+
+            // crear la tabla principal
+            this.CrearTablaHorarios();
+
+            string linea;
+            string[] matrizNombre;
+            string[] matrizFechas;
+            char separador1 = '|';
+            char separador2 = '-';
+
+            // iterar hasta que se acabe el archivo
+            int i = 0;
+            while(!lector.EndOfStream)
+            {
+                linea = lector.ReadLine();
+                matrizNombre = linea.Split(separador1);
+                matrizFechas = matrizNombre[0].Split(separador2);
+
+                Actividad acn = new Actividad();
+                acn.nombre = matrizNombre[1];
+                acn.horaInicio = matrizFechas[0];
+                acn.horaTermino = matrizFechas[1];
+                acn.estado = 0;
+
+                ev.actividadesEvento[i] = acn;
+
+                // crar una cantidad n de tablas e insertar la activad enesima
+                this.CrearTablaActividades(i + 1);
+
+                i++;
+               
+            }
+
+        }
+
+        private void cronogramaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog f1 = new FolderBrowserDialog();
+            f1.ShowDialog();
+
+            this.rutaCrono = f1.SelectedPath;
+        }
+
+        private void asistentesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog f1 = new FolderBrowserDialog();
+            f1.ShowDialog();
+
+            this.rutaAsist= f1.SelectedPath;
+        }
+
+        private void button4_Click_1(object sender, EventArgs e)
+        {
+            this.CargarFormato(this.rutaCrono);
+
+            // poner en la caja de texto 
+            StreamReader lector = new StreamReader(this.rutaCrono);
+
+            while( !lector.EndOfStream)
+                this.lec.Text += lector.ReadLine();
+
+        }
+
+        // crear tablas para los horarios de las actividades
+        private void CrearTablaHorarios (  )
+        {
+            // crear comando de creacion
+            string ComandoCreacion = @"CREATE TABLE horarios" +
+                @"(
+                    nombreActidad varchar (20), 
+                    horaInicio    varchar (10),
+                    horaTermino   varchar (10),
+                    estado        integer 
+                  );" ;
+
+
+            // abrir una conexion 
+            this.conexion = new MySqlConnection(this.cadenaConexion);
+            this.conexion.Open();
+
+            // crear un comando 
+            MySqlCommand cm = new MySqlCommand(ComandoCreacion, this.conexion);
+
+            // ejecutar comando de creacion
+            cm.ExecuteNonQuery();
+
+            // cerrar la conexion 
+            this.conexion.Close();
+
+        }
+
+        // crear tablas para las actividades
+        private void CrearTablaActividades( int n )
+        {
+            // crear comando de creacion
+            string ComandoCreacion = @"CREATE TABLE actividad" + n.ToString() +
+                @"(
+                    nombre        varchar (20), 
+                    nua           integer (10),
+                    entrada       bool,
+                    salida        bool 
+                  );";
+
+
+            // abrir una conexion 
+            this.conexion = new MySqlConnection(this.cadenaConexion);
+            this.conexion.Open();
+
+            // crear un comando 
+            MySqlCommand cm = new MySqlCommand(ComandoCreacion, this.conexion);
+
+            // ejecutar comando de creacion
+            cm.ExecuteNonQuery();
+
+            // cerrar la conexion 
+            this.conexion.Close();
+
+        }
+
+
     }
 }

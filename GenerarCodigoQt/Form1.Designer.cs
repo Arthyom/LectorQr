@@ -53,6 +53,9 @@
             this.rutaImagenesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
             this.desdeSQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripDropDownButton3 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.borrarBaseDeDatosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reestablecerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnInsertar = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -68,6 +71,15 @@
             this.label7 = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.lec = new System.Windows.Forms.TextBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.entradaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cronogramaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.asistentesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.qrSinSQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabModo.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -79,6 +91,8 @@
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            this.tabPage3.SuspendLayout();
+            this.panel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer1
@@ -89,6 +103,7 @@
             // 
             this.tabModo.Controls.Add(this.tabPage1);
             this.tabModo.Controls.Add(this.tabPage2);
+            this.tabModo.Controls.Add(this.tabPage3);
             this.tabModo.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabModo.Location = new System.Drawing.Point(-2, 124);
             this.tabModo.Name = "tabModo";
@@ -99,6 +114,7 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.White;
+            this.tabPage1.Controls.Add(this.button3);
             this.tabPage1.Controls.Add(this.panel5);
             this.tabPage1.Controls.Add(this.panel3);
             this.tabPage1.Controls.Add(this.btnInsertar);
@@ -254,7 +270,8 @@
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripDropDownButton1,
-            this.toolStripDropDownButton2});
+            this.toolStripDropDownButton2,
+            this.toolStripDropDownButton3});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(757, 28);
@@ -265,7 +282,8 @@
             // 
             this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.salidaToolStripMenuItem});
+            this.salidaToolStripMenuItem,
+            this.entradaToolStripMenuItem});
             this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
@@ -277,7 +295,7 @@
             this.salidaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.rutaImagenesToolStripMenuItem});
             this.salidaToolStripMenuItem.Name = "salidaToolStripMenuItem";
-            this.salidaToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
+            this.salidaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.salidaToolStripMenuItem.Text = "Salida";
             // 
             // rutaImagenesToolStripMenuItem
@@ -291,7 +309,8 @@
             // 
             this.toolStripDropDownButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.desdeSQLToolStripMenuItem});
+            this.desdeSQLToolStripMenuItem,
+            this.qrSinSQLToolStripMenuItem});
             this.toolStripDropDownButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton2.Image")));
             this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
@@ -301,13 +320,39 @@
             // desdeSQLToolStripMenuItem
             // 
             this.desdeSQLToolStripMenuItem.Name = "desdeSQLToolStripMenuItem";
-            this.desdeSQLToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.desdeSQLToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.desdeSQLToolStripMenuItem.Text = "Desde SQL";
             this.desdeSQLToolStripMenuItem.Click += new System.EventHandler(this.desdeSQLToolStripMenuItem_Click);
             // 
+            // toolStripDropDownButton3
+            // 
+            this.toolStripDropDownButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripDropDownButton3.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.borrarBaseDeDatosToolStripMenuItem,
+            this.reestablecerToolStripMenuItem});
+            this.toolStripDropDownButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton3.Image")));
+            this.toolStripDropDownButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton3.Name = "toolStripDropDownButton3";
+            this.toolStripDropDownButton3.Size = new System.Drawing.Size(70, 25);
+            this.toolStripDropDownButton3.Text = "Opciones";
+            // 
+            // borrarBaseDeDatosToolStripMenuItem
+            // 
+            this.borrarBaseDeDatosToolStripMenuItem.Name = "borrarBaseDeDatosToolStripMenuItem";
+            this.borrarBaseDeDatosToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.borrarBaseDeDatosToolStripMenuItem.Text = "Borrar Base de Datos";
+            this.borrarBaseDeDatosToolStripMenuItem.Click += new System.EventHandler(this.borrarBaseDeDatosToolStripMenuItem_Click);
+            // 
+            // reestablecerToolStripMenuItem
+            // 
+            this.reestablecerToolStripMenuItem.Name = "reestablecerToolStripMenuItem";
+            this.reestablecerToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.reestablecerToolStripMenuItem.Text = "Reestablecer";
+            this.reestablecerToolStripMenuItem.Click += new System.EventHandler(this.reestablecerToolStripMenuItem_Click);
+            // 
             // btnInsertar
             // 
-            this.btnInsertar.Location = new System.Drawing.Point(543, 463);
+            this.btnInsertar.Location = new System.Drawing.Point(6, 463);
             this.btnInsertar.Name = "btnInsertar";
             this.btnInsertar.Size = new System.Drawing.Size(220, 75);
             this.btnInsertar.TabIndex = 4;
@@ -317,7 +362,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(278, 463);
+            this.button2.Location = new System.Drawing.Point(543, 463);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(220, 75);
             this.button2.TabIndex = 6;
@@ -327,7 +372,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(6, 463);
+            this.button1.Location = new System.Drawing.Point(267, 463);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(231, 75);
             this.button1.TabIndex = 5;
@@ -460,11 +505,88 @@
             this.pictureBox3.TabIndex = 13;
             this.pictureBox3.TabStop = false;
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(324, 85);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(261, 59);
+            this.button3.TabIndex = 9;
+            this.button3.Text = "button3";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click_1);
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.lec);
+            this.tabPage3.Controls.Add(this.panel6);
+            this.tabPage3.Location = new System.Drawing.Point(4, 34);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(1436, 605);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Modo Carga";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.button4);
+            this.panel6.Location = new System.Drawing.Point(3, 270);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(398, 268);
+            this.panel6.TabIndex = 0;
+            // 
+            // lec
+            // 
+            this.lec.BackColor = System.Drawing.Color.Silver;
+            this.lec.Location = new System.Drawing.Point(407, 3);
+            this.lec.Multiline = true;
+            this.lec.Name = "lec";
+            this.lec.Size = new System.Drawing.Size(940, 535);
+            this.lec.TabIndex = 1;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(3, 206);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(392, 59);
+            this.button4.TabIndex = 10;
+            this.button4.Text = "Cargar Archivo";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click_1);
+            // 
+            // entradaToolStripMenuItem
+            // 
+            this.entradaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cronogramaToolStripMenuItem,
+            this.asistentesToolStripMenuItem});
+            this.entradaToolStripMenuItem.Name = "entradaToolStripMenuItem";
+            this.entradaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.entradaToolStripMenuItem.Text = "Entrada";
+            // 
+            // cronogramaToolStripMenuItem
+            // 
+            this.cronogramaToolStripMenuItem.Name = "cronogramaToolStripMenuItem";
+            this.cronogramaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cronogramaToolStripMenuItem.Text = "Cronograma";
+            this.cronogramaToolStripMenuItem.Click += new System.EventHandler(this.cronogramaToolStripMenuItem_Click);
+            // 
+            // asistentesToolStripMenuItem
+            // 
+            this.asistentesToolStripMenuItem.Name = "asistentesToolStripMenuItem";
+            this.asistentesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.asistentesToolStripMenuItem.Text = "Asistentes";
+            this.asistentesToolStripMenuItem.Click += new System.EventHandler(this.asistentesToolStripMenuItem_Click);
+            // 
+            // qrSinSQLToolStripMenuItem
+            // 
+            this.qrSinSQLToolStripMenuItem.Name = "qrSinSQLToolStripMenuItem";
+            this.qrSinSQLToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.qrSinSQLToolStripMenuItem.Text = "Qr Sin SQL";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1362, 699);
+            this.ClientSize = new System.Drawing.Size(1354, 699);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.tabModo);
             this.Controls.Add(this.pictureBox2);
@@ -486,6 +608,9 @@
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            this.panel6.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -529,6 +654,18 @@
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton3;
+        private System.Windows.Forms.ToolStripMenuItem borrarBaseDeDatosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem reestablecerToolStripMenuItem;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TextBox lec;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.ToolStripMenuItem entradaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cronogramaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem asistentesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem qrSinSQLToolStripMenuItem;
     }
 }
 
