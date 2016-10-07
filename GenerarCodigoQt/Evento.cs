@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GenerarCodigoQt
 {
-    class Evento
+    public class Evento
     {
        public string        nombre;
        public string        horaInicio;

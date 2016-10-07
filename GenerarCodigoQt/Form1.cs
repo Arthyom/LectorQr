@@ -7,6 +7,7 @@ using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
 using Gma.QrCodeNet.Encoding;
 using Gma.QrCodeNet.Encoding.Windows.Render;
@@ -17,6 +18,8 @@ using MySql.Data.MySqlClient;
 using AForge.Controls;
 using BarcodeLib.BarcodeReader;
 using System.Security.Principal;
+using System.Collections;
+
 // el primer paso es enlazar la dll del conector que el paquete msi, agrego al sistema, hecho esto solo es necesario agregar el espacio de nombres
 
 
@@ -31,22 +34,23 @@ namespace GenerarCodigoQt
 
         public string cadenaConexion = "Server = localhost; Database=estudiantes; Uid=root; Pwd= ;";
         public MySqlConnection conexion;
-        public string rutaGuardado = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/CodigosGenerados";
+        public string rutaGuardado = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/ingles/CodigosGenerados/";
         public string rutaSql  = "../../../scripBaseDatos.sql";
         public string menAceptado = "ACEPTADO", menRechazado = "RECHAZADO", menVacio = "VACIO";
-<<<<<<< HEAD
+
         public string rutaCrono = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/ingles/cronograma.txt" ;
         public string rutaAsist = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/ingles/asistentes.txt";
-=======
-        
+        public string rutaGenl = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/ingles/";
+        public StreamWriter escritorActual;
         public string[,] ListadoNombres;
+        public Evento eventoAcual;
 
         void LeerDeTxt()
         {
             int i = 0;
             //Lee cada linea del archivo y la asigna en un arreglo.
             //Cada elemento del arreglo es una linea del archivo!
-            string[] lines = System.IO.File.ReadAllLines(@"C:\Users\master73\Desktop\text.txt");
+            string[] lines = System.IO.File.ReadAllLines(this.rutaAsist);
 
             //se reestructuran dimensiones para matriz donde será alojado el nombre y nua del alumno
             ListadoNombres = new string[lines.Length, 2];
@@ -69,8 +73,6 @@ namespace GenerarCodigoQt
 
 
         }
->>>>>>> 1466abc8f89e10c041a0d5fd096dbea0c98098dc
-
         void ConectarConMysql()
         {
             // crear cadena de conexion, se puede hacer a mano o creando un connectionbuilder
@@ -89,20 +91,16 @@ namespace GenerarCodigoQt
             else
                  c = 3;
 
-           
-
             Conexion.Close();
         }
-        
-
-
-
+       
         public Form1()
         {
             InitializeComponent();
-            LeerDeTxt();
+            //LeerDeTxt();
             //           //prueba mostrar nombre y nua
-            //          MessageBox.Show(" ", ListadoNombres[1, 0] + " " + ListadoNombres[1, 1]);
+            //MessageBox.Show(" nua ", ListadoNombres[1, 0] + " nombre " + ListadoNombres[1, 1]);
+           
         }
 
         // genera codigos qr y los guarda en un directorio apartir de los datos de una tabla
@@ -167,6 +165,61 @@ namespace GenerarCodigoQt
                 pictureBox1.Refresh();
             }
             MessageBox.Show("Lectura termiada", " ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        // leer matriz de nombres y generar su Qr
+        void generarQrFromTxt()
+        {
+            // crear una conexion
+            this.conexion = new MySqlConnection(this.cadenaConexion);
+            this.conexion.Open();
+
+            for ( int i = 0; i < 120; i ++ )
+            {
+                for ( int j = 0; j < 1; j ++ )
+                {
+                    // crear un encoder, codificador
+                    QrEncoder Codificador = new QrEncoder(ErrorCorrectionLevel.H);
+
+                    // crear un codigo QR
+                    QrCode Codigo = new QrCode();
+
+                    string nua = ListadoNombres[i, j];
+                    string nombre = ListadoNombres[i, j + 1];
+
+                    string com = " INSERT INTO registro ( nombre, nua ) VALUES ('" + nombre + "'," + nua + " )";
+
+                    MySqlCommand comando = new MySqlCommand(com, this.conexion);
+                    comando.ExecuteNonQuery();
+                 
+
+
+                    // generar generar  un codigo apartir de datos, y pasar el codigo por referencia
+                    Codificador.TryEncode(nombre + " " + nua, out Codigo);
+
+                    // generar un graficador 
+                    GraphicsRenderer Renderisado = new GraphicsRenderer(new FixedCodeSize(200, QuietZoneModules.Zero), Brushes.Black, Brushes.White);
+
+                    // generar un flujo de datos 
+                    MemoryStream ms = new MemoryStream();
+
+                    // escribir datos en el renderizado
+                    Renderisado.WriteToStream(Codigo.Matrix, ImageFormat.Png, ms);
+
+                    // generar controles para ponerlos en el form
+                    var ImagenQR = new Bitmap(ms);
+                    var ImgenSalida = new Bitmap(ImagenQR, new Size( 114 , 114 ));
+
+                    if (!Directory.Exists(this.rutaGuardado))
+                        // crear un directorio 
+                        Directory.CreateDirectory(this.rutaGuardado);
+
+                    ImgenSalida.Save(this.rutaGuardado + "/" + nombre+nua + ".png", System.Drawing.Imaging.ImageFormat.Png);
+                }
+            }
+            this.conexion.Close();
+            MessageBox.Show("Lectura termiada", " ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -352,9 +405,9 @@ namespace GenerarCodigoQt
                         this.conexion.Open();
 
                         /* crear un comando */
-                        string nua = matriz[1];
-                        string nombre = matriz[0];
-                        string comandoInterno = "SELECT * FROM estudiante WHERE nua =" + Convert.ToInt32(nua) + ";";
+                        string nua = matriz[matriz.Length-1];
+                        string nombre = matriz[2];
+                        string comandoInterno = "SELECT * FROM registro WHERE nua =" + Convert.ToInt32(nua) + ";";
 
                         try
                         {
@@ -365,7 +418,7 @@ namespace GenerarCodigoQt
                             MySqlDataReader lectort = Comando.ExecuteReader();
 
 
-                            if (lectort.Read())
+                            if ( lectort.Read() )
                             {
                                 this.panel1.BackColor = Color.Green;
                                 this.panel1.Refresh();
@@ -373,36 +426,44 @@ namespace GenerarCodigoQt
                                 this.label7.Refresh();
 
 
-                                if (!lectort.GetBoolean(6))
+                                if ( true )
                                 {
+                                    /*
+                                    string evens = ",nombreEvento1 = '" + lectort.GetString(2) + "', asistenciaEvento1 = '"+ lectort.GetString(3);
+
+                                    for (int i = 3; i < this.eventoAcual.numeroActividades - 2; i++)
+                                        evens += ",nombreEvento" + (i-1).ToString() +  " = '" + lectort.GetString(i+1) + " ', asistenciaEvento" + (i-1).ToString() + " =' " + lectort.GetString(i+2) + "'" ;
+
                                     this.conexion = new MySqlConnection(this.cadenaConexion);
                                     // actulizar la asistencia de los registrados 
-                                    string comandoActu = @"UPDATE estudiante SET  nombre ='" + lectort.GetString(1) +
-                                         "', evento = '" + lectort.GetString(2) + "', carrera ='" + lectort.GetString(3) + "', apeidoPaterno = '" + lectort.GetString(4) +
-                                         "', apeidoMaterno = ' " + lectort.GetString(5) + "', asistencia =" + !lectort.GetBoolean(6) + " WHERE nua =" + lectort.GetInt32(0) + ";";
+                                    string comandoActu = @"UPDATE registro SET  nombre ='" + lectort.GetString(0) + evens +" WHERE nua =" + lectort.GetInt32(1) + ";";
+                                    */
 
-                                    ListViewItem itNua = new ListViewItem(lectort.GetString(0));
-                                    ListViewItem.ListViewSubItem itCar = new ListViewItem.ListViewSubItem(itNua, lectort.GetString(3));
-                                    ListViewItem.ListViewSubItem itNom = new ListViewItem.ListViewSubItem(itNua, lectort.GetString(1));
-                                    ListViewItem.ListViewSubItem itApa = new ListViewItem.ListViewSubItem(itNua, lectort.GetString(4));
-                                    ListViewItem.ListViewSubItem itAma = new ListViewItem.ListViewSubItem(itNua, lectort.GetString(5));
+                                    // escribier en el escritor actual 
+                                    // MessageBox.Show(" ", nombre + nua);
+                                    //MessageBox.Show(this.rutaGenl);
+                                    this.escritorActual.WriteLine (nombre + " | " + nua);
+
+
+                                    ListViewItem itNua = new ListViewItem(lectort.GetString(1));
+                                    ListViewItem.ListViewSubItem itNom = new ListViewItem.ListViewSubItem(itNua, lectort.GetString(0));
+
+                                    //System.Threading.Thread.Sleep(1000);
+
 
                                     itNua.SubItems.Add(itNom);
-                                    itNua.SubItems.Add(itApa);
-                                    itNua.SubItems.Add(itAma);
-                                    itNua.SubItems.Add(itCar);
                                     listView1.Items.Add(itNua);
 
                                     this.conexion.Close();
 
                                     // crear un nuevo commando 
-                                    MySqlCommand comandoUpdate = new MySqlCommand(comandoActu, this.conexion);
-                                    this.conexion.Open();
+                                    //MySqlCommand comandoUpdate = new MySqlCommand(comandoActu, this.conexion);
+                                    //this.conexion.Open();
 
 
                                     // ejecutar el nuevo comando
-                                    comandoUpdate.ExecuteNonQuery();
-                                    this.conexion.Close();
+                                    //comandoUpdate.ExecuteNonQuery();
+                                    //this.conexion.Close();
 
                                     System.Threading.Thread.Sleep(500);
                                     // MessageBox.Show("Asistencia Confirmada");
@@ -460,6 +521,22 @@ namespace GenerarCodigoQt
         private void panel4_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        bool verificarAsis( string nua )
+        {
+            StreamReader lector = new StreamReader(this.rutaGenl + (string) this.comboBox2.SelectedItem + ".txt");
+            string[] matriz;
+            char separador = '|';
+
+            while( !lector.EndOfStream )
+            {
+                matriz = lector.ReadLine().Split(separador);
+                if (nua.CompareTo(matriz[1]) == 0)
+                    return false;
+            }
+
+            return true;
         }
 
         // botonApagar
@@ -563,9 +640,15 @@ namespace GenerarCodigoQt
                 // escribir datos en el renderizado
                 Renderisado.WriteToStream(Codigo.Matrix, ImageFormat.Png, ms);
 
+                //Graphics e = 
+
+
                 // generar controles para ponerlos en el form
                 var ImagenQR = new Bitmap(ms);
+
                 var ImgenSalida = new Bitmap(ImagenQR, new Size(panel4.Width / 2, panel4.Height / 2));
+
+
 
                 // asignar la imagen al panel 
                 // panel4.BackgroundImage = ImgenSalida;
@@ -669,7 +752,7 @@ namespace GenerarCodigoQt
                 this.conexion.Open();
 
                 // crear un comando 
-                string comando = "DELETE FROM estudiante";
+                string comando = "DELETE FROM estudiante; DELETE FROM registro; ";
                 MySqlCommand comandoBorrar = new MySqlCommand(comando, this.conexion);
                 
 
@@ -748,8 +831,8 @@ namespace GenerarCodigoQt
             // definir un vector de n eventos
             ev.actividadesEvento = new Actividad[ev.numeroActividades];
 
-            // crear la tabla principal
-            this.CrearTablaHorarios();
+            // crear la tabla principal para controlar los registros
+            this.CrearTablaRegistro();
 
             string linea;
             string[] matrizNombre;
@@ -773,12 +856,11 @@ namespace GenerarCodigoQt
 
                 ev.actividadesEvento[i] = acn;
 
-                // crar una cantidad n de tablas e insertar la activad enesima
-                this.CrearTablaActividades(i + 1);
-
                 i++;
                
             }
+
+            this.eventoAcual = ev;
 
         }
 
@@ -806,7 +888,12 @@ namespace GenerarCodigoQt
             StreamReader lector = new StreamReader(this.rutaCrono);
 
             while( !lector.EndOfStream )
-                this.lec.Text += lector.ReadLine();
+                this.lec.Text += (lector.ReadLine() + " \n ");
+
+            lec.Refresh();
+
+            foreach (Actividad ac in this.eventoAcual.actividadesEvento)
+                this.comboBox2.Items.Add(ac.nombre);
 
         }
 
@@ -814,9 +901,27 @@ namespace GenerarCodigoQt
         {
             DialogResult re = MessageBox.Show("Desea generar codigos Qr desde archivo de registro", " ", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-            if (re == DialogResult.Yes) generarQrFromSQL();
+            if (re == DialogResult.Yes)
+            {
+                LeerDeTxt();
+                generarQrFromTxt();
+            }
             else
                 MessageBox.Show("Se ha omitido la generacion automatica de Codigo Qr", " ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        // iniciar registro de eventos en un nuevo archivo de texto
+        private void button3_Click_2(object sender, EventArgs e)
+        {
+            this.escritorActual = new StreamWriter( this.rutaGenl + (string) this.comboBox2.SelectedItem+".txt", true);
+            MessageBox.Show("Puede Comenzar A Leer Los Qr", " ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        // sacar al primer escritor de la cola
+        private void button5_Click_2(object sender, EventArgs e)
+        {
+            this.escritorActual.Close();
+            MessageBox.Show("El Evento Ha Sido Finalizado", " ", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         // crear tablas para los horarios de las actividades
@@ -847,17 +952,15 @@ namespace GenerarCodigoQt
 
         }
 
-        // crear tablas para las actividades
-        private void CrearTablaActividades( int n )
+        // crear tablas para el control de registros aceptados 
+        private void CrearTablaRegistro(  )
         {
             // crear comando de creacion
-            string ComandoCreacion = @"CREATE TABLE actividad" + n.ToString() +
-                @"(
-                    nombre        varchar (20), 
-                    nua           integer (10),
-                    entrada       bool,
-                    salida        bool 
-                  );";
+            string ComandoCreacion = @" CREATE TABLE IF NOT EXISTS registro 
+                 (
+                    nombre        varchar (70), 
+                    nua           integer  
+                 );";
 
 
             // abrir una conexion 

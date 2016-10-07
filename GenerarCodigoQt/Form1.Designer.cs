@@ -51,8 +51,12 @@
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.salidaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rutaImagenesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.entradaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cronogramaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.asistentesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
             this.desdeSQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.qrSinSQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripDropDownButton3 = new System.Windows.Forms.ToolStripDropDownButton();
             this.borrarBaseDeDatosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reestablecerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,16 +73,15 @@
             this.button6 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.lec = new System.Windows.Forms.TextBox();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.button4 = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.lec = new System.Windows.Forms.TextBox();
-            this.button4 = new System.Windows.Forms.Button();
-            this.entradaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cronogramaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.asistentesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.qrSinSQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabModo.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -88,10 +91,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.tabPage3.SuspendLayout();
             this.panel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
             // timer1
@@ -293,7 +296,7 @@
             this.salidaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.rutaImagenesToolStripMenuItem});
             this.salidaToolStripMenuItem.Name = "salidaToolStripMenuItem";
-            this.salidaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.salidaToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.salidaToolStripMenuItem.Text = "Salida";
             // 
             // rutaImagenesToolStripMenuItem
@@ -302,6 +305,29 @@
             this.rutaImagenesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.rutaImagenesToolStripMenuItem.Text = "Ruta Imagenes";
             this.rutaImagenesToolStripMenuItem.Click += new System.EventHandler(this.rutaImagenesToolStripMenuItem_Click);
+            // 
+            // entradaToolStripMenuItem
+            // 
+            this.entradaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cronogramaToolStripMenuItem,
+            this.asistentesToolStripMenuItem});
+            this.entradaToolStripMenuItem.Name = "entradaToolStripMenuItem";
+            this.entradaToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.entradaToolStripMenuItem.Text = "Entrada";
+            // 
+            // cronogramaToolStripMenuItem
+            // 
+            this.cronogramaToolStripMenuItem.Name = "cronogramaToolStripMenuItem";
+            this.cronogramaToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.cronogramaToolStripMenuItem.Text = "Cronograma";
+            this.cronogramaToolStripMenuItem.Click += new System.EventHandler(this.cronogramaToolStripMenuItem_Click);
+            // 
+            // asistentesToolStripMenuItem
+            // 
+            this.asistentesToolStripMenuItem.Name = "asistentesToolStripMenuItem";
+            this.asistentesToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.asistentesToolStripMenuItem.Text = "Asistentes";
+            this.asistentesToolStripMenuItem.Click += new System.EventHandler(this.asistentesToolStripMenuItem_Click);
             // 
             // toolStripDropDownButton2
             // 
@@ -318,9 +344,16 @@
             // desdeSQLToolStripMenuItem
             // 
             this.desdeSQLToolStripMenuItem.Name = "desdeSQLToolStripMenuItem";
-            this.desdeSQLToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.desdeSQLToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.desdeSQLToolStripMenuItem.Text = "Desde SQL";
             this.desdeSQLToolStripMenuItem.Click += new System.EventHandler(this.desdeSQLToolStripMenuItem_Click);
+            // 
+            // qrSinSQLToolStripMenuItem
+            // 
+            this.qrSinSQLToolStripMenuItem.Name = "qrSinSQLToolStripMenuItem";
+            this.qrSinSQLToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.qrSinSQLToolStripMenuItem.Text = "Desde Txt";
+            this.qrSinSQLToolStripMenuItem.Click += new System.EventHandler(this.qrSinSQLToolStripMenuItem_Click);
             // 
             // toolStripDropDownButton3
             // 
@@ -479,6 +512,77 @@
             this.label7.TabIndex = 0;
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.button5);
+            this.tabPage3.Controls.Add(this.button3);
+            this.tabPage3.Controls.Add(this.comboBox2);
+            this.tabPage3.Controls.Add(this.lec);
+            this.tabPage3.Controls.Add(this.panel6);
+            this.tabPage3.Location = new System.Drawing.Point(4, 34);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(1436, 605);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Modo Carga";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            this.button5.BackColor = System.Drawing.Color.Red;
+            this.button5.Location = new System.Drawing.Point(210, 52);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(191, 49);
+            this.button5.TabIndex = 4;
+            this.button5.Text = "Detener";
+            this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click_2);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(6, 52);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(191, 49);
+            this.button3.TabIndex = 3;
+            this.button3.Text = "Iniciar";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click_2);
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(10, 13);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(391, 33);
+            this.comboBox2.TabIndex = 2;
+            // 
+            // lec
+            // 
+            this.lec.BackColor = System.Drawing.Color.Silver;
+            this.lec.Location = new System.Drawing.Point(407, 3);
+            this.lec.Multiline = true;
+            this.lec.Name = "lec";
+            this.lec.Size = new System.Drawing.Size(940, 535);
+            this.lec.TabIndex = 1;
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.button4);
+            this.panel6.Location = new System.Drawing.Point(3, 272);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(398, 266);
+            this.panel6.TabIndex = 0;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(3, 206);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(392, 59);
+            this.button4.TabIndex = 10;
+            this.button4.Text = "Cargar Archivo";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click_1);
+            // 
             // pictureBox2
             // 
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
@@ -503,83 +607,11 @@
             this.pictureBox3.TabIndex = 13;
             this.pictureBox3.TabStop = false;
             // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.lec);
-            this.tabPage3.Controls.Add(this.panel6);
-            this.tabPage3.Location = new System.Drawing.Point(4, 34);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1436, 605);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Modo Carga";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // panel6
-            // 
-            this.panel6.Controls.Add(this.button4);
-            this.panel6.Location = new System.Drawing.Point(3, 270);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(398, 268);
-            this.panel6.TabIndex = 0;
-            // 
-            // lec
-            // 
-            this.lec.BackColor = System.Drawing.Color.Silver;
-            this.lec.Location = new System.Drawing.Point(407, 3);
-            this.lec.Multiline = true;
-            this.lec.Name = "lec";
-            this.lec.Size = new System.Drawing.Size(940, 535);
-            this.lec.TabIndex = 1;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(3, 206);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(392, 59);
-            this.button4.TabIndex = 10;
-            this.button4.Text = "Cargar Archivo";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click_1);
-            // 
-            // entradaToolStripMenuItem
-            // 
-            this.entradaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cronogramaToolStripMenuItem,
-            this.asistentesToolStripMenuItem});
-            this.entradaToolStripMenuItem.Name = "entradaToolStripMenuItem";
-            this.entradaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.entradaToolStripMenuItem.Text = "Entrada";
-            // 
-            // cronogramaToolStripMenuItem
-            // 
-            this.cronogramaToolStripMenuItem.Name = "cronogramaToolStripMenuItem";
-            this.cronogramaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.cronogramaToolStripMenuItem.Text = "Cronograma";
-            this.cronogramaToolStripMenuItem.Click += new System.EventHandler(this.cronogramaToolStripMenuItem_Click);
-            // 
-            // asistentesToolStripMenuItem
-            // 
-            this.asistentesToolStripMenuItem.Name = "asistentesToolStripMenuItem";
-            this.asistentesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.asistentesToolStripMenuItem.Text = "Asistentes";
-            this.asistentesToolStripMenuItem.Click += new System.EventHandler(this.asistentesToolStripMenuItem_Click);
-            // 
-            // qrSinSQLToolStripMenuItem
-            // 
-            this.qrSinSQLToolStripMenuItem.Name = "qrSinSQLToolStripMenuItem";
-            this.qrSinSQLToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.qrSinSQLToolStripMenuItem.Text = "Desde Txt";
-            this.qrSinSQLToolStripMenuItem.Click += new System.EventHandler(this.qrSinSQLToolStripMenuItem_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-<<<<<<< HEAD
-            this.ClientSize = new System.Drawing.Size(1354, 699);
-=======
             this.ClientSize = new System.Drawing.Size(1284, 699);
->>>>>>> 1466abc8f89e10c041a0d5fd096dbea0c98098dc
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.tabModo);
             this.Controls.Add(this.pictureBox2);
@@ -599,11 +631,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.panel6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -658,6 +690,9 @@
         private System.Windows.Forms.ToolStripMenuItem cronogramaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem asistentesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem qrSinSQLToolStripMenuItem;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.ComboBox comboBox2;
     }
 }
 
