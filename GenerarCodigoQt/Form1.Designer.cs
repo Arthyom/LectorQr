@@ -575,7 +575,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+<<<<<<< HEAD
             this.ClientSize = new System.Drawing.Size(1354, 699);
+=======
+            this.ClientSize = new System.Drawing.Size(1284, 699);
+>>>>>>> 1466abc8f89e10c041a0d5fd096dbea0c98098dc
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.tabModo);
             this.Controls.Add(this.pictureBox2);
