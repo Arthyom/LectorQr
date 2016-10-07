@@ -35,14 +35,14 @@ namespace GenerarCodigoQt
         public string menAceptado = "ACEPTADO", menRechazado = "RECHAZADO", menVacio = "VACIO";
         
         public string[,] ListadoNombres;
-        
+
         void LeerDeTxt()
         {
             int i = 0;
             //Lee cada linea del archivo y la asigna en un arreglo.
             //Cada elemento del arreglo es una linea del archivo!
             string[] lines = System.IO.File.ReadAllLines(@"C:\Users\master73\Desktop\text.txt");
-            
+
             //se reestructuran dimensiones para matriz donde será alojado el nombre y nua del alumno
             ListadoNombres = new string[lines.Length, 2];
 
@@ -53,12 +53,12 @@ namespace GenerarCodigoQt
                 //se divide en nua y nombre la línea leída previamente 
                 string[] values = line.Split(new char[] { }, StringSplitOptions.RemoveEmptyEntries);
                 //se guardan los valores por separado en la matriz
-                ListadoNombres[i,0] = values[0];
-                ListadoNombres[i,1] = values[1] + " " + values[2] + " " + values[3];
+                ListadoNombres[i, 0] = values[0];
+                ListadoNombres[i, 1] = values[1] + " " + values[2] + " " + values[3];
                 //Para ver en consola de visual studio los datos almacenados
-                Console.WriteLine("\t" + ListadoNombres[i,0]);
-                Console.WriteLine("\t" + ListadoNombres[i,1]);
-                i++;               
+                Console.WriteLine("\t" + ListadoNombres[i, 0]);
+                Console.WriteLine("\t" + ListadoNombres[i, 1]);
+                i++;
             }
             System.Console.Read();
 
@@ -95,8 +95,8 @@ namespace GenerarCodigoQt
         {
             InitializeComponent();
             LeerDeTxt();
- //           //prueba mostrar nombre y nua
- //          MessageBox.Show(" ", ListadoNombres[1, 0] + " " + ListadoNombres[1, 1]);
+            //           //prueba mostrar nombre y nua
+            //          MessageBox.Show(" ", ListadoNombres[1, 0] + " " + ListadoNombres[1, 1]);
         }
 
         // genera codigos qr y los guarda en un directorio apartir de los datos de una tabla
