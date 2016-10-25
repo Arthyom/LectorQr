@@ -34,15 +34,16 @@ namespace GenerarCodigoQt
 
         public string cadenaConexion = "Server = localhost; Database=estudiantes; Uid=root; Pwd= ;";
         public MySqlConnection conexion;
-        public string rutaGuardado = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/ingles/CodigosGenerados/";
+        public string rutaGuardado = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/congresoMulti/CodigosGenerados/";
         public string rutaSql  = "../../../scripBaseDatos.sql";
         public string menAceptado = "ACEPTADO", menRechazado = "RECHAZADO", menVacio = "VACIO";
 
-        public string rutaCrono = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/ingles/cronograma.txt" ;
-        public string rutaAsist = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/ingles/asistentes.txt";
-        public string rutaGenl = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/ingles/";
+        public string rutaCrono = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/congresoMulti/cronograma.txt" ;
+        public string rutaAsist = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/congresoMulti/asistentes.txt";
+        public string rutaGenl = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/congresoMulti/";
         public StreamWriter escritorActual;
         public string[,] ListadoNombres;
+        public int lineas;
         public Evento eventoAcual;
 
         void LeerDeTxt()
@@ -51,19 +52,20 @@ namespace GenerarCodigoQt
             //Lee cada linea del archivo y la asigna en un arreglo.
             //Cada elemento del arreglo es una linea del archivo!
             string[] lines = System.IO.File.ReadAllLines(this.rutaAsist);
+            this.lineas = lines.Length;
 
             //se reestructuran dimensiones para matriz donde será alojado el nombre y nua del alumno
             ListadoNombres = new string[lines.Length, 2];
 
             //Mostramos en consola el contenido del archivo.
             System.Console.WriteLine("Contenido de text.txt = ");
-            foreach (string line in lines)
+            foreach (string line in lines )
             {
                 //se divide en nua y nombre la línea leída previamente 
                 string[] values = line.Split(new char[] { }, StringSplitOptions.RemoveEmptyEntries);
                 //se guardan los valores por separado en la matriz
                 ListadoNombres[i, 0] = values[0];
-                ListadoNombres[i, 1] = values[1] + " " + values[2] + " " + values[3];
+                ListadoNombres[i, 1] = values[1] + " " + values[2] ;
                 //Para ver en consola de visual studio los datos almacenados
                 Console.WriteLine("\t" + ListadoNombres[i, 0]);
                 Console.WriteLine("\t" + ListadoNombres[i, 1]);
@@ -174,7 +176,7 @@ namespace GenerarCodigoQt
             this.conexion = new MySqlConnection(this.cadenaConexion);
             this.conexion.Open();
 
-            for ( int i = 0; i < 120; i ++ )
+            for ( int i = 0; i < this.lineas; i ++ )
             {
                 for ( int j = 0; j < 1; j ++ )
                 {
@@ -874,10 +876,10 @@ namespace GenerarCodigoQt
 
         private void asistentesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog f1 = new FolderBrowserDialog();
-            f1.ShowDialog();
+            OpenFileDialog f1 = new OpenFileDialog()
+;            f1.ShowDialog();
 
-            this.rutaAsist= f1.SelectedPath;
+            this.rutaAsist = f1.FileName;
         }
 
         private void button4_Click_1(object sender, EventArgs e)
@@ -888,9 +890,9 @@ namespace GenerarCodigoQt
             StreamReader lector = new StreamReader(this.rutaCrono);
 
             while( !lector.EndOfStream )
-                this.lec.Text += (lector.ReadLine() + " \n ");
+                this.listBox1.Items.Add ( (lector.ReadLine() ) );
 
-            lec.Refresh();
+            listBox1.Refresh();
 
             foreach (Actividad ac in this.eventoAcual.actividadesEvento)
                 this.comboBox2.Items.Add(ac.nombre);
@@ -922,6 +924,11 @@ namespace GenerarCodigoQt
         {
             this.escritorActual.Close();
             MessageBox.Show("El Evento Ha Sido Finalizado", " ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
         }
 
         // crear tablas para los horarios de las actividades

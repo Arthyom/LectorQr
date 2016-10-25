@@ -77,11 +77,11 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.lec = new System.Windows.Forms.TextBox();
             this.panel6 = new System.Windows.Forms.Panel();
             this.button4 = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.tabModo.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -514,10 +514,10 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.listBox1);
             this.tabPage3.Controls.Add(this.button5);
             this.tabPage3.Controls.Add(this.button3);
             this.tabPage3.Controls.Add(this.comboBox2);
-            this.tabPage3.Controls.Add(this.lec);
             this.tabPage3.Controls.Add(this.panel6);
             this.tabPage3.Location = new System.Drawing.Point(4, 34);
             this.tabPage3.Name = "tabPage3";
@@ -556,15 +556,6 @@
             this.comboBox2.Size = new System.Drawing.Size(391, 33);
             this.comboBox2.TabIndex = 2;
             // 
-            // lec
-            // 
-            this.lec.BackColor = System.Drawing.Color.Silver;
-            this.lec.Location = new System.Drawing.Point(407, 3);
-            this.lec.Multiline = true;
-            this.lec.Name = "lec";
-            this.lec.Size = new System.Drawing.Size(940, 535);
-            this.lec.TabIndex = 1;
-            // 
             // panel6
             // 
             this.panel6.Controls.Add(this.button4);
@@ -593,6 +584,7 @@
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 12;
             this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
             // pictureBox3
             // 
@@ -606,6 +598,16 @@
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox3.TabIndex = 13;
             this.pictureBox3.TabStop = false;
+            // 
+            // listBox1
+            // 
+            this.listBox1.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 25;
+            this.listBox1.Location = new System.Drawing.Point(407, 13);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(871, 529);
+            this.listBox1.TabIndex = 5;
             // 
             // Form1
             // 
@@ -632,7 +634,6 @@
             this.tabPage2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
             this.panel6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -683,7 +684,6 @@
         private System.Windows.Forms.ToolStripMenuItem borrarBaseDeDatosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reestablecerToolStripMenuItem;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.TextBox lec;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.ToolStripMenuItem entradaToolStripMenuItem;
@@ -693,6 +693,7 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }
 
