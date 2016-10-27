@@ -35,10 +35,10 @@ namespace GenerarCodigoQt
         public string cadenaConexion = "Server = localhost; Database=estudiantes; Uid=root; Pwd= ;";
         public MySqlConnection conexion;
         public string rutaGuardado = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/congresoMulti/CodigosGenerados/";
-        public string rutaSql  = "../../../scripBaseDatos.sql";
+        public string rutaSql = "../../../scripBaseDatos.sql";
         public string menAceptado = "ACEPTADO", menRechazado = "RECHAZADO", menVacio = "VACIO";
 
-        public string rutaCrono = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/congresoMulti/cronograma.txt" ;
+        public string rutaCrono = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/congresoMulti/cronograma.txt";
         public string rutaAsist = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/congresoMulti/asistentes.txt";
         public string rutaGenl = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/congresoMulti/";
         public StreamWriter escritorActual;
@@ -59,13 +59,13 @@ namespace GenerarCodigoQt
 
             //Mostramos en consola el contenido del archivo.
             System.Console.WriteLine("Contenido de text.txt = ");
-            foreach (string line in lines )
+            foreach (string line in lines)
             {
                 //se divide en nua y nombre la línea leída previamente 
                 string[] values = line.Split(new char[] { }, StringSplitOptions.RemoveEmptyEntries);
                 //se guardan los valores por separado en la matriz
                 ListadoNombres[i, 0] = values[0];
-                ListadoNombres[i, 1] = values[1] + " " + values[2] ;
+                ListadoNombres[i, 1] = values[1] + " " + values[2];
                 //Para ver en consola de visual studio los datos almacenados
                 Console.WriteLine("\t" + ListadoNombres[i, 0]);
                 Console.WriteLine("\t" + ListadoNombres[i, 1]);
@@ -81,28 +81,28 @@ namespace GenerarCodigoQt
             MySqlConnection Conexion = new MySqlConnection("Server = localhost; Database=qr; Uid=root; Pwd= ;");
 
             // crear un comando para la base de datos
-            MySqlCommand Comando = new MySqlCommand("INSERT INTO usuario( carrera ) VALUES ('victor');",Conexion);
+            MySqlCommand Comando = new MySqlCommand("INSERT INTO usuario( carrera ) VALUES ('victor');", Conexion);
 
             // abrir la conexion con la base de datos para ejecutar el comando 
             Conexion.Open();
 
             int a = 2, c = 43;
 
-            if ( Convert.ToBoolean(Comando.ExecuteNonQuery() ) )
-                 a = 2;
+            if (Convert.ToBoolean(Comando.ExecuteNonQuery()))
+                a = 2;
             else
-                 c = 3;
+                c = 3;
 
             Conexion.Close();
         }
-       
+
         public Form1()
         {
             InitializeComponent();
             //LeerDeTxt();
             //           //prueba mostrar nombre y nua
             //MessageBox.Show(" nua ", ListadoNombres[1, 0] + " nombre " + ListadoNombres[1, 1]);
-           
+
         }
 
         // genera codigos qr y los guarda en un directorio apartir de los datos de una tabla
@@ -176,9 +176,9 @@ namespace GenerarCodigoQt
             this.conexion = new MySqlConnection(this.cadenaConexion);
             this.conexion.Open();
 
-            for ( int i = 0; i < this.lineas; i ++ )
+            for (int i = 0; i < this.lineas; i++)
             {
-                for ( int j = 0; j < 1; j ++ )
+                for (int j = 0; j < 1; j++)
                 {
                     // crear un encoder, codificador
                     QrEncoder Codificador = new QrEncoder(ErrorCorrectionLevel.H);
@@ -193,7 +193,7 @@ namespace GenerarCodigoQt
 
                     MySqlCommand comando = new MySqlCommand(com, this.conexion);
                     comando.ExecuteNonQuery();
-                 
+
 
 
                     // generar generar  un codigo apartir de datos, y pasar el codigo por referencia
@@ -210,13 +210,13 @@ namespace GenerarCodigoQt
 
                     // generar controles para ponerlos en el form
                     var ImagenQR = new Bitmap(ms);
-                    var ImgenSalida = new Bitmap(ImagenQR, new Size( 114 , 114 ));
+                    var ImgenSalida = new Bitmap(ImagenQR, new Size(114, 114));
 
                     if (!Directory.Exists(this.rutaGuardado))
                         // crear un directorio 
                         Directory.CreateDirectory(this.rutaGuardado);
 
-                    ImgenSalida.Save(this.rutaGuardado + "/" + nombre+nua + ".png", System.Drawing.Imaging.ImageFormat.Png);
+                    ImgenSalida.Save(this.rutaGuardado + "/" + nombre + nua + ".png", System.Drawing.Imaging.ImageFormat.Png);
                 }
             }
             this.conexion.Close();
@@ -226,10 +226,10 @@ namespace GenerarCodigoQt
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            listView1.Columns.Add( "NUA" , this.listView1.Width/5 );
-            listView1.Columns.Add( "Nombre", this.listView1.Width / 5);
+            listView1.Columns.Add("NUA", this.listView1.Width / 5);
+            listView1.Columns.Add("Nombre", this.listView1.Width / 5);
 
-            listView1.Columns.Add( "A. Paternod", this.listView1.Width / 3);
+            listView1.Columns.Add("A. Paternod", this.listView1.Width / 3);
             listView1.Columns.Add(" A. Materno", this.listView1.Width / 3);
             listView1.Columns.Add(" Carrera ", this.listView1.Width / 5);
 
@@ -247,11 +247,11 @@ namespace GenerarCodigoQt
             // agregar control
             VideoSourcePlayer ControlVideo = new VideoSourcePlayer();
             ControlVideo.BackColor = Color.Red;
-            ControlVideo.Size = new Size(panel2.Width,panel2.Height);
+            ControlVideo.Size = new Size(panel2.Width, panel2.Height);
             ControlVideo.Name = "ControlVideo";
             panel2.Controls.Add(ControlVideo);
 
-           
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -259,15 +259,15 @@ namespace GenerarCodigoQt
             // crear un directorio para los codigos 
             string ruta = @"C:\Users\frodo\Desktop\codigosQr";
 
-            if ( ! Directory.Exists(ruta))
+            if (!Directory.Exists(ruta))
             {
                 // crear un directorio 
                 Directory.CreateDirectory(ruta);
-            } 
+            }
 
             /// generar un codigo QR para los elementos de la caja 
-        
-            for ( int i = 1; i <= 30; i ++)
+
+            for (int i = 1; i <= 30; i++)
             {
                 // crear un encoder, codificador
                 QrEncoder Codificador = new QrEncoder(ErrorCorrectionLevel.H);
@@ -276,7 +276,7 @@ namespace GenerarCodigoQt
                 QrCode Codigo = new QrCode();
 
                 // generar generar  un codigo apartir de datos, y pasar el codigo por referencia
-                Codificador.TryEncode("Gonzalez"+i.ToString(), out Codigo);
+                Codificador.TryEncode("Gonzalez" + i.ToString(), out Codigo);
 
                 // generar un graficador 
                 GraphicsRenderer Renderisado = new GraphicsRenderer(new FixedCodeSize(200, QuietZoneModules.Zero), Brushes.Black, Brushes.White);
@@ -292,7 +292,7 @@ namespace GenerarCodigoQt
                 var ImgenSalida = new Bitmap(ImagenQR, new Size(panel1.Width, panel1.Height));
 
                 // guardar la imagen
-                ImgenSalida.Save(ruta + "/" + i.ToString() +".png", System.Drawing.Imaging.ImageFormat.Png);
+                ImgenSalida.Save(ruta + "/" + i.ToString() + ".png", System.Drawing.Imaging.ImageFormat.Png);
 
                 // asignar la imagen al panel 
                 panel1.BackgroundImage = ImgenSalida;
@@ -300,11 +300,11 @@ namespace GenerarCodigoQt
                 panel1.Refresh();
                 System.Threading.Thread.Sleep(500);
             }
-            
-            
 
 
-                 
+
+
+
         }
 
         // insertar en la base de datos
@@ -319,16 +319,16 @@ namespace GenerarCodigoQt
 
             MySqlConnection Con = new MySqlConnection("Server=localhost; Database=codigoqr; Uid=root; Pwd=;");
 
-            MySqlCommand Com = new MySqlCommand("INSERT INTO Usuarios (IdUsuario, nombre, carrera, asistencia) VALUES (" + " ' "+  Convert.ToUInt32( NumeroId) + " ' " + "," + " ' " + txtCarrera.Text + " ' "+ "," +" ' "+ txtMaterno.Text + " ' "+","+ 0 +");", Con);
+            MySqlCommand Com = new MySqlCommand("INSERT INTO Usuarios (IdUsuario, nombre, carrera, asistencia) VALUES (" + " ' " + Convert.ToUInt32(NumeroId) + " ' " + "," + " ' " + txtCarrera.Text + " ' " + "," + " ' " + txtMaterno.Text + " ' " + "," + 0 + ");", Con);
             MySqlCommand Com2 = new MySqlCommand("SELECT * FROM usuarios", Con);
 
             Con.Open();
 
 
-            if ( Convert.ToBoolean( Com.ExecuteNonQuery()))
+            if (Convert.ToBoolean(Com.ExecuteNonQuery()))
             {
                 MessageBox.Show("Insertado");
-        
+
             }
             Con.Close();
 
@@ -362,7 +362,7 @@ namespace GenerarCodigoQt
             // conseguir el control de video del form
             VideoSourcePlayer Reproductor = (VideoSourcePlayer)this.panel2.Controls["ControlVideo"];
 
-           Reproductor.VideoSource = new VideoCaptureDevice(this.ColeccionDisp[comboBox1.SelectedIndex].MonikerString);
+            Reproductor.VideoSource = new VideoCaptureDevice(this.ColeccionDisp[comboBox1.SelectedIndex].MonikerString);
             Reproductor.Start();
         }
 
@@ -388,31 +388,31 @@ namespace GenerarCodigoQt
                 // conseguir el resultado de la lectura 
                 string[] codigo = BarcodeReader.read(imagen, BarcodeReader.QRCODE);
 
-
-                // limpiar la memoria
-                imagen.Dispose();
-
-                // agregar cuando se lea algo
-                if (codigo != null)
+                try
                 {
-                    char separador = ' ';
-                    string[] matriz = codigo[0].Split(separador);
+                    // limpiar la memoria
+                    imagen.Dispose();
 
-                    if (matriz.Count() >= 2)
+                    // agregar cuando se lea algo
+                    if (codigo != null)
                     {
-                        // verificar si existe coincidencia en la base de datos para "codigo"
+                        char separador = ' ';
+                        string[] matriz = codigo[0].Split(separador);
 
-                        /* crear una nueva conexion */
-                        this.conexion = new MySqlConnection(this.cadenaConexion);
-                        this.conexion.Open();
-
-                        /* crear un comando */
-                        string nua = matriz[matriz.Length-1];
-                        string nombre = matriz[2];
-                        string comandoInterno = "SELECT * FROM registro WHERE nua =" + Convert.ToInt32(nua) + ";";
-
-                        try
+                        if (matriz.Count() >= 2)
                         {
+                            // verificar si existe coincidencia en la base de datos para "codigo"
+
+                            /* crear una nueva conexion */
+                            this.conexion = new MySqlConnection(this.cadenaConexion);
+                            this.conexion.Open();
+
+                            /* crear un comando */
+                            string nua = matriz[matriz.Length - 1];
+                            string nombre = matriz[2];
+                            string comandoInterno = "SELECT * FROM registro WHERE nua =" + Convert.ToInt32(nua) + ";";
+
+
 
                             MySqlCommand Comando = new MySqlCommand(comandoInterno, this.conexion);
 
@@ -420,7 +420,7 @@ namespace GenerarCodigoQt
                             MySqlDataReader lectort = Comando.ExecuteReader();
 
 
-                            if ( lectort.Read() )
+                            if (lectort.Read())
                             {
                                 this.panel1.BackColor = Color.Green;
                                 this.panel1.Refresh();
@@ -428,7 +428,7 @@ namespace GenerarCodigoQt
                                 this.label7.Refresh();
 
 
-                                if ( true )
+                                if (true)
                                 {
                                     /*
                                     string evens = ",nombreEvento1 = '" + lectort.GetString(2) + "', asistenciaEvento1 = '"+ lectort.GetString(3);
@@ -444,7 +444,7 @@ namespace GenerarCodigoQt
                                     // escribier en el escritor actual 
                                     // MessageBox.Show(" ", nombre + nua);
                                     //MessageBox.Show(this.rutaGenl);
-                                    this.escritorActual.WriteLine (nombre + " | " + nua);
+                                    this.escritorActual.WriteLine(nombre + " | " + nua);
 
 
                                     ListViewItem itNua = new ListViewItem(lectort.GetString(1));
@@ -475,45 +475,25 @@ namespace GenerarCodigoQt
                                     return;
                                 }
                             }
-                            else
-                            {
-                                this.panel1.BackColor = Color.Red;
-                                this.label7.Text = this.menRechazado;
-                                this.label7.Refresh();
-
-                            }
-
-
-
                         }
-                        catch (Exception ex)
+                        else
                         {
-                            panel1.BackColor = Color.Yellow;
-                            panel1.Refresh();
-                            System.Threading.Thread.Sleep(500);
-
+                            this.panel1.BackColor = Color.Red;
+                            this.label7.Text = this.menRechazado;
+                            this.label7.Refresh();
                         }
                     }
-                    else
-                    {
+                }
+                catch( Exception ex)
+                {
+
                         this.panel1.BackColor = Color.Red;
                         this.label7.Text = this.menRechazado;
                         this.label7.Refresh();
-                    }
-                    this.conexion.Close();
-
-
+                    
                 }
-                else {
-                    panel1.BackColor = Color.Black;
-                    this.label7.Text = this.menVacio;
-                }
-
-            }
-            
-
-            
         }
+    }
 
         private void button5_Click(object sender, EventArgs e)
         {
