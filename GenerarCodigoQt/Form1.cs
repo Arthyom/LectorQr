@@ -34,13 +34,13 @@ namespace GenerarCodigoQt
 
         public string cadenaConexion = "Server = localhost; Database=estudiantes; Uid=root; Pwd= ;";
         public MySqlConnection conexion;
-        public string rutaGuardado = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/congresoMulti/CodigosGenerados/";
+        public string rutaGuardado;
         public string rutaSql = "../../../scripBaseDatos.sql";
         public string menAceptado = "ACEPTADO", menRechazado = "RECHAZADO", menVacio = "VACIO";
 
-        public string rutaCrono = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/congresoMulti/cronograma.txt";
-        public string rutaAsist = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/congresoMulti/asistentes.txt";
-        public string rutaGenl = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/congresoMulti/";
+        public string rutaCrono;
+        public string rutaAsist;
+        public string rutaGenl;
         public StreamWriter escritorActual;
         public string[,] ListadoNombres;
         public int lineas;
@@ -426,71 +426,56 @@ namespace GenerarCodigoQt
                                 this.panel1.Refresh();
                                 this.label7.Text = this.menAceptado;
                                 this.label7.Refresh();
+                                System.Threading.Thread.Sleep(500);
+
+                                this.escritorActual.WriteLine(nombre + " | " + nua);
 
 
-                                if (true)
-                                {
-                                    /*
-                                    string evens = ",nombreEvento1 = '" + lectort.GetString(2) + "', asistenciaEvento1 = '"+ lectort.GetString(3);
-
-                                    for (int i = 3; i < this.eventoAcual.numeroActividades - 2; i++)
-                                        evens += ",nombreEvento" + (i-1).ToString() +  " = '" + lectort.GetString(i+1) + " ', asistenciaEvento" + (i-1).ToString() + " =' " + lectort.GetString(i+2) + "'" ;
-
-                                    this.conexion = new MySqlConnection(this.cadenaConexion);
-                                    // actulizar la asistencia de los registrados 
-                                    string comandoActu = @"UPDATE registro SET  nombre ='" + lectort.GetString(0) + evens +" WHERE nua =" + lectort.GetInt32(1) + ";";
-                                    */
-
-                                    // escribier en el escritor actual 
-                                    // MessageBox.Show(" ", nombre + nua);
-                                    //MessageBox.Show(this.rutaGenl);
-                                    this.escritorActual.WriteLine(nombre + " | " + nua);
+                                ListViewItem itNua = new ListViewItem(lectort.GetString(1));
+                                ListViewItem.ListViewSubItem itNom = new ListViewItem.ListViewSubItem(itNua, lectort.GetString(0));
 
 
-                                    ListViewItem itNua = new ListViewItem(lectort.GetString(1));
-                                    ListViewItem.ListViewSubItem itNom = new ListViewItem.ListViewSubItem(itNua, lectort.GetString(0));
+                                itNua.SubItems.Add(itNom);
+                                listView1.Items.Add(itNua);
 
-                                    //System.Threading.Thread.Sleep(1000);
+                                // cerrar al escritor en cada escritura
+                                this.conexion.Close();
 
+                                return;
+                            }
 
-                                    itNua.SubItems.Add(itNom);
-                                    listView1.Items.Add(itNua);
+                            else
+                            {
+                                this.panel1.BackColor = Color.Red;
+                                this.panel1.Refresh();
+                                this.label7.Text = this.menRechazado;
+                                this.label7.Refresh();
+                                System.Threading.Thread.Sleep(500);
 
-                                    this.conexion.Close();
-
-                                    // crear un nuevo commando 
-                                    //MySqlCommand comandoUpdate = new MySqlCommand(comandoActu, this.conexion);
-                                    //this.conexion.Open();
-
-
-                                    // ejecutar el nuevo comando
-                                    //comandoUpdate.ExecuteNonQuery();
-                                    //this.conexion.Close();
-
-                                    System.Threading.Thread.Sleep(500);
-                                    // MessageBox.Show("Asistencia Confirmada");
-                                    timer1.Stop();
-                                    System.Threading.Thread.Sleep(500);
-                                    timer1.Start();
-                                    return;
-                                }
                             }
                         }
-                        else
-                        {
-                            this.panel1.BackColor = Color.Red;
-                            this.label7.Text = this.menRechazado;
-                            this.label7.Refresh();
-                        }
+                    }
+                    else
+                    {
+                        this.panel1.BackColor = Color.Black;
+                        panel1.Refresh();
+                        this.label7.Text = this.menVacio;                
+                        this.label7.Refresh();
+
                     }
                 }
-                catch( Exception ex)
+                catch( Exception ex )
                 {
 
-                        this.panel1.BackColor = Color.Red;
-                        this.label7.Text = this.menRechazado;
+                        this.panel1.BackColor = Color.Yellow;
+                    this.label7.Text = "INVALIDO";
+                        panel1.Refresh();
                         this.label7.Refresh();
-                    
+
+            
+                    System.Threading.Thread.Sleep(500);
+      
+
                 }
         }
     }
@@ -848,10 +833,10 @@ namespace GenerarCodigoQt
 
         private void cronogramaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog f1 = new FolderBrowserDialog();
+            OpenFileDialog f1 = new OpenFileDialog();
             f1.ShowDialog();
 
-            this.rutaCrono = f1.SelectedPath;
+            this.rutaCrono = f1.FileName;
         }
 
         private void asistentesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -869,13 +854,19 @@ namespace GenerarCodigoQt
             // poner en la caja de texto 
             StreamReader lector = new StreamReader(this.rutaCrono);
 
-            while( !lector.EndOfStream )
-                this.listBox1.Items.Add ( (lector.ReadLine() ) );
+            while( !lector.EndOfStream)
+                this.listBox1.Items.Add(( lector.ReadLine()));
+
+ 
 
             listBox1.Refresh();
 
             foreach (Actividad ac in this.eventoAcual.actividadesEvento)
-                this.comboBox2.Items.Add(ac.nombre);
+            {
+                this.comboBox2.Items.Add(" [ E ]"+  ac.nombre);
+                this.comboBox2.Items.Add(" [ S ]" + ac.nombre);
+            }
+                
 
         }
 
@@ -895,7 +886,7 @@ namespace GenerarCodigoQt
         // iniciar registro de eventos en un nuevo archivo de texto
         private void button3_Click_2(object sender, EventArgs e)
         {
-            this.escritorActual = new StreamWriter( this.rutaGenl + (string) this.comboBox2.SelectedItem+".txt", true);
+            this.escritorActual = new StreamWriter( this.rutaGenl +  "/" +this.comboBox2.SelectedItem+".txt", true);
             MessageBox.Show("Puede Comenzar A Leer Los Qr", " ", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -909,6 +900,15 @@ namespace GenerarCodigoQt
         private void pictureBox2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void eventosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog f = new FolderBrowserDialog();
+            f.ShowDialog();
+
+            this.rutaGenl = f.SelectedPath;
+            MessageBox.Show(this.rutaGenl);
         }
 
         // crear tablas para los horarios de las actividades

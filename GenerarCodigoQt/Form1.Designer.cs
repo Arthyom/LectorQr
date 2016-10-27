@@ -74,6 +74,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.button5 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
@@ -81,7 +82,7 @@
             this.button4 = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.eventosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabModo.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -294,9 +295,10 @@
             // salidaToolStripMenuItem
             // 
             this.salidaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.rutaImagenesToolStripMenuItem});
+            this.rutaImagenesToolStripMenuItem,
+            this.eventosToolStripMenuItem});
             this.salidaToolStripMenuItem.Name = "salidaToolStripMenuItem";
-            this.salidaToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.salidaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.salidaToolStripMenuItem.Text = "Salida";
             // 
             // rutaImagenesToolStripMenuItem
@@ -312,20 +314,20 @@
             this.cronogramaToolStripMenuItem,
             this.asistentesToolStripMenuItem});
             this.entradaToolStripMenuItem.Name = "entradaToolStripMenuItem";
-            this.entradaToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.entradaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.entradaToolStripMenuItem.Text = "Entrada";
             // 
             // cronogramaToolStripMenuItem
             // 
             this.cronogramaToolStripMenuItem.Name = "cronogramaToolStripMenuItem";
-            this.cronogramaToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.cronogramaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cronogramaToolStripMenuItem.Text = "Cronograma";
             this.cronogramaToolStripMenuItem.Click += new System.EventHandler(this.cronogramaToolStripMenuItem_Click);
             // 
             // asistentesToolStripMenuItem
             // 
             this.asistentesToolStripMenuItem.Name = "asistentesToolStripMenuItem";
-            this.asistentesToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.asistentesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.asistentesToolStripMenuItem.Text = "Asistentes";
             this.asistentesToolStripMenuItem.Click += new System.EventHandler(this.asistentesToolStripMenuItem_Click);
             // 
@@ -526,6 +528,16 @@
             this.tabPage3.Text = "Modo Carga";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // listBox1
+            // 
+            this.listBox1.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 25;
+            this.listBox1.Location = new System.Drawing.Point(407, 13);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(871, 529);
+            this.listBox1.TabIndex = 5;
+            // 
             // button5
             // 
             this.button5.BackColor = System.Drawing.Color.Red;
@@ -599,15 +611,12 @@
             this.pictureBox3.TabIndex = 13;
             this.pictureBox3.TabStop = false;
             // 
-            // listBox1
+            // eventosToolStripMenuItem
             // 
-            this.listBox1.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 25;
-            this.listBox1.Location = new System.Drawing.Point(407, 13);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(871, 529);
-            this.listBox1.TabIndex = 5;
+            this.eventosToolStripMenuItem.Name = "eventosToolStripMenuItem";
+            this.eventosToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.eventosToolStripMenuItem.Text = "Eventos";
+            this.eventosToolStripMenuItem.Click += new System.EventHandler(this.eventosToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -694,6 +703,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ToolStripMenuItem eventosToolStripMenuItem;
     }
 }
 
